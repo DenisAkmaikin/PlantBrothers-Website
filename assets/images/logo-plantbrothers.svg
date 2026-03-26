@@ -1,0 +1,36 @@
+<svg width="720" height="240" viewBox="0 0 720 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="pbDark" x1="84" y1="22" x2="247" y2="164" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#163824"/>
+      <stop offset="1" stop-color="#0B2E1B"/>
+    </linearGradient>
+    <linearGradient id="pbLeaf" x1="40" y1="135" x2="177" y2="190" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#9DCC45"/>
+      <stop offset="1" stop-color="#5D9C33"/>
+    </linearGradient>
+    <linearGradient id="pbLeaf2" x1="178" y1="133" x2="316" y2="192" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#97C742"/>
+      <stop offset="1" stop-color="#4E8F32"/>
+    </linearGradient>
+    <linearGradient id="pbText" x1="0" y1="198" x2="575" y2="198" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0A301A"/>
+      <stop offset="1" stop-color="#4D9440"/>
+    </linearGradient>
+  </defs>
+  <g transform="translate(24 10)">
+    <path d="M151 25C127 25 108 42 108 67C108 81 113 95 118 107C123 120 122 140 120 152H181C178 142 178 122 184 106C190 90 195 79 195 67C195 42 176 25 151 25Z" fill="url(#pbDark)"/>
+    <path d="M149 37C132 34 115 38 101 50C112 48 121 49 130 54C121 53 112 57 102 66C116 64 127 66 136 72" stroke="#214E2E" stroke-width="4" stroke-linecap="round"/>
+    <path d="M147 66C126 66 111 83 111 104V109C111 127 119 142 133 151C138 154 141 160 140 166L137 185H165L162 166C161 160 164 154 169 151C183 142 191 127 191 109V104C191 83 176 66 155 66H147Z" fill="url(#pbDark)"/>
+    <path d="M263 26C235 26 213 48 213 75C213 87 217 98 222 109C226 119 227 138 225 153H300C298 140 299 121 303 111C308 99 313 89 313 75C313 48 291 26 263 26Z" fill="url(#pbDark)"/>
+    <path d="M311 55C333 55 347 67 347 82C347 96 334 107 310 109L299 108L299 67L311 55Z" fill="url(#pbDark)"/>
+    <path d="M261 69C237 69 220 87 220 110V116C220 134 228 149 242 158C247 161 249 167 249 173V186H278V173C278 167 280 161 285 158C299 149 307 134 307 116V110C307 87 289 69 266 69H261Z" fill="url(#pbDark)"/>
+    <path d="M148 130C108 146 64 154 29 153C57 167 86 178 118 185C148 191 168 194 198 198C186 167 171 145 148 130Z" fill="#0B2E1B"/>
+    <path d="M281 130C319 146 364 154 397 151C371 167 340 179 309 186C281 192 259 196 231 199C242 169 258 145 281 130Z" fill="#0B2E1B"/>
+    <path d="M11 137C51 141 93 155 130 178C154 192 170 207 183 222C165 218 147 216 120 213C83 209 56 204 31 188C17 179 8 159 11 137Z" fill="url(#pbLeaf)"/>
+    <path d="M388 137C347 141 305 155 268 178C244 192 228 207 216 222C234 218 252 216 279 213C315 209 343 204 368 188C381 179 391 159 388 137Z" fill="url(#pbLeaf2)"/>
+    <path d="M128 179C97 177 69 165 43 145" stroke="#0A301A" stroke-width="4" stroke-linecap="round"/>
+    <path d="M271 180C302 177 330 165 356 147" stroke="#0A301A" stroke-width="4" stroke-linecap="round"/>
+    <path d="M145 161C167 173 183 193 194 222C204 193 220 173 242 161" stroke="#F5F5F0" stroke-width="9" stroke-linecap="round"/>
+  </g>
+  <text x="16" y="226" fill="url(#pbText)" font-size="92" font-family="Georgia, 'Times New Roman', serif" font-weight="700">PlantBrothers</text>
+</svg>
