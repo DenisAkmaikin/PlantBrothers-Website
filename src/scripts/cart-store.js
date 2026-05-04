@@ -1,11 +1,14 @@
-const CART_KEY = "plantbrothers-cart";
+import { getCurrentLanguage } from "../data/translations.js?v=20260503";
+
+const CART_KEY = "4everplants-cart";
 
 function canUseStorage() {
   return typeof window !== "undefined" && "localStorage" in window;
 }
 
 export function formatPrice(value) {
-  return new Intl.NumberFormat("nl-NL", {
+  const lang = getCurrentLanguage() === "en" ? "en-GB" : getCurrentLanguage();
+  return new Intl.NumberFormat(lang, {
     style: "currency",
     currency: "EUR",
     minimumFractionDigits: 0,

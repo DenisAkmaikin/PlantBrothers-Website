@@ -32,5 +32,5 @@
     <path d="M271 180C302 177 330 165 356 147" stroke="#0A301A" stroke-width="4" stroke-linecap="round"/>
     <path d="M145 161C167 173 183 193 194 222C204 193 220 173 242 161" stroke="#F5F5F0" stroke-width="9" stroke-linecap="round"/>
   </g>
-  <text x="16" y="226" fill="url(#pbText)" font-size="92" font-family="Georgia, 'Times New Roman', serif" font-weight="700">PlantBrothers</text>
+  <text x="16" y="226" fill="url(#pbText)" font-size="92" font-family="Georgia, 'Times New Roman', serif" font-weight="700">4EverPlants</text>
 </svg>

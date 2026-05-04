@@ -1,8 +1,8 @@
 export const siteConfig = {
-  brand: "PlantBrothers",
-  phone: "+31 (0)20 123 45 67",
-  email: "hallo@plantbrothers.nl",
-  address: "Keizersgracht 214, 1016 DZ Amsterdam",
+  brand: "4EverPlants",
+  phone: "+31 (0)26 123 45 67",
+  email: "info@4everplants.nl",
+  address: "Eimerssingel-oost 25C, 6834CX Arnhem",
   ctaPrimary: {
     label: "Shop nu",
     href: "/collectie.html",
@@ -20,59 +20,136 @@ export const siteConfig = {
 };
 
 export const announcementItems = [
-  "Voor 16:00 besteld is morgen in huis",
-  "Gratis verzending boven 100 euro",
-  "4.8/5 klantbeoordeling",
-  "90 dagen bedenktijd",
+  "Ordered before 16:00, delivered tomorrow",
+  "Free shipping from €100",
 ];
 
+export const shippingPolicy = {
+  freeThreshold: 100,
+  nl: {
+    freeFrom: 100,
+    cost: 6.95,
+    deliveryTime: "1-2 working days"
+  },
+  be_de: {
+    freeFrom: 100,
+    cost: 8.95,
+    deliveryTime: "2-3 working days"
+  },
+  eu: {
+    freeFrom: 150,
+    cost: 12.95,
+    deliveryTime: "3-5 working days"
+  },
+  intl: {
+    cost: 25,
+    deliveryTime: "5-10 working days",
+    note: "Customs and import costs for customer"
+  },
+  cutoffTime: 16 // 16:00
+};
+
+export const returnPolicy = {
+  warranty: "1-year manufacturer's warranty",
+  warrantyPoints: [
+    "Warranty against manufacturing defects",
+    "Warranty against construction (e.g., loose parts)",
+    "Solution via replacement or repair"
+  ],
+  coolingOffPeriod: 14,
+  returnWindow: 14,
+  conditions: [
+    "Product in original condition and packaging",
+    "Only unpacked for inspection",
+    "Not used or damaged"
+  ],
+  returnCostNote: "At your own expense, unless the product is damaged or incorrectly delivered.",
+  refundWindow: 14
+};
+
 export const navigation = [
-  { label: "Inspiratie", href: "/index.html#blog-inspiratie" },
-  { label: "Over ons", href: "/over-ons.html" },
+  { label: "Why Us", href: "/waarom-4everplants.html" },
+  { label: "Business", href: "/zakelijk.html" },
+  { label: "About Us", href: "/over-ons.html" },
   { label: "Contact", href: "/contact.html" },
   { label: "Sale", href: "/collectie.html#sale", highlight: true },
 ];
 
 export const shopCategories = [
   {
-    id: "kunstplanten",
-    title: "Kunstplanten",
+    id: "artificial-plants",
+    title: "Artificial plants",
     products: [
       {
         label: "Monstera",
         href: "/product-detail.html?slug=faux-monstera-plant",
-        image: "/assets/images/monstera-studio.png",
+        image: "/assets/images/product-images/monstera-studio.png",
       },
       {
-        label: "Column Cactus",
-        href: "/product-detail.html?slug=column-cactus",
-        image: "/assets/images/column-cactus-studio.png",
+        label: "Ficus",
+        href: "/product-detail.html?slug=ficus-plant",
+        image: "/assets/images/product-images/ficus_180cm_studio.jpg",
       },
       {
         label: "Bougainvillea",
         href: "/product-detail.html?slug=artificial-bougainvillea-tree",
-        image: "/assets/images/RozeboomStudio.png",
+        image: "/assets/images/product-images/RozeboomStudio.png",
+      },
+      {
+        label: "Bamboo",
+        href: "/product-detail.html?slug=bamboeplant",
+        image: "/assets/images/product-images/bamboe_150cm_studio.jpg",
+      },
+      {
+        label: "Strelitzia",
+        href: "/product-detail.html?slug=strelitzia-plant",
+        image: "/assets/images/product-images/strelitzia_150cm_studio.jpg",
+      },
+      {
+        label: "Kunstpalm",
+        href: "/product-detail.html?slug=kunstpalm",
+        image: "/assets/images/product-images/kunstpalm_180cm_studio.jpg",
+      },
+      {
+        label: "Banana Plant",
+        href: "/product-detail.html?slug=banana-plant",
+        image: "/assets/images/product-images/bananenplant_180cm_studio.jpg",
+      },
+      {
+        label: "Column Cactus",
+        href: "/product-detail.html?slug=column-cactus",
+        image: "/assets/images/product-images/column-cactus-studio.png",
       },
     ],
     links: [
       { label: "Monstera", href: "/product-detail.html?slug=faux-monstera-plant" },
-      { label: "Column Cactus", href: "/product-detail.html?slug=column-cactus" },
+      { label: "Ficus", href: "/product-detail.html?slug=ficus-plant" },
       { label: "Bougainvillea", href: "/product-detail.html?slug=artificial-bougainvillea-tree" },
+      { label: "Bamboo", href: "/product-detail.html?slug=bamboeplant" },
+      { label: "Strelitzia", href: "/product-detail.html?slug=strelitzia-plant" },
+      { label: "Kunstpalm", href: "/product-detail.html?slug=kunstpalm" },
+      { label: "Banana Plant", href: "/product-detail.html?slug=banana-plant" },
+      { label: "Column Cactus", href: "/product-detail.html?slug=column-cactus" },
     ],
   },
   {
-    id: "kunstbomen",
-    title: "Kunstbomen",
+    id: "artificial-trees",
+    title: "Artificial trees",
     products: [
       {
-        label: "Olijfboom",
+        label: "Olive Tree",
         href: "/product-detail.html?slug=faux-olive-tree",
-        image: "/assets/images/artificial-olivetree-studio.png",
+        image: "/assets/images/product-images/artificial-olivetree-studio.png",
       },
       {
         label: "Lemon Tree",
         href: "/product-detail.html?slug=artificial-lemon-tree",
-        image: "/assets/images/product-lemon.svg",
+        image: "/assets/images/product-images/citroenboom_180cm_studio.jpg?v=2",
+      },
+      {
+        label: "Orange Plant",
+        href: "/product-detail.html?slug=sinaasappelplant",
+        image: "/assets/images/product-images/sinaasappelboom_180cm_studio.jpg",
       },
       {
         label: "Tree Geranium",
@@ -81,49 +158,50 @@ export const shopCategories = [
       },
     ],
     links: [
-      { label: "Olijfboom", href: "/product-detail.html?slug=faux-olive-tree" },
+      { label: "Olive Tree", href: "/product-detail.html?slug=faux-olive-tree" },
       { label: "Lemon Tree", href: "/product-detail.html?slug=artificial-lemon-tree" },
+      { label: "Orange Plant", href: "/product-detail.html?slug=sinaasappelplant" },
       { label: "Tree Geranium", href: "/product-detail.html?slug=artificial-tree-geranium" },
     ],
   },
   {
-    id: "kunsthaag",
-    title: "Kunsthaag",
+    id: "artificial-hedge",
+    title: "Artificial hedge",
     products: [
       {
-        label: "Kunsthaag paneel",
+        label: "Artificial hedge panel",
         href: "/collectie.html",
         image: "/assets/images/category-hanging.svg",
       },
       {
-        label: "Olijf kunsthaag",
+        label: "Olive artificial hedge",
         href: "/collectie.html",
         image: "/assets/images/business-space.svg",
       },
     ],
     links: [
-      { label: "Kunsthaag paneel", href: "/collectie.html" },
-      { label: "Olijf kunsthaag", href: "/collectie.html" },
+      { label: "Artificial hedge panel", href: "/collectie.html" },
+      { label: "Olive artificial hedge", href: "/collectie.html" },
     ],
   },
   {
-    id: "vazen",
-    title: "Vazen",
+    id: "vases",
+    title: "Vases",
     products: [
       {
-        label: "Stijlvolle vaas 1",
+        label: "Stylish vase 1",
         href: "/collectie.html#potten-en-styling",
         image: "/assets/images/category-styling.svg",
       },
       {
-        label: "Stijlvolle vaas 2",
+        label: "Stylish vase 2",
         href: "/collectie.html#potten-en-styling",
         image: "/assets/images/story-studio.svg",
       },
     ],
     links: [
-      { label: "Stijlvolle vaas 1", href: "/collectie.html#potten-en-styling" },
-      { label: "Stijlvolle vaas 2", href: "/collectie.html#potten-en-styling" },
+      { label: "Stylish vase 1", href: "/collectie.html#potten-en-styling" },
+      { label: "Stylish vase 2", href: "/collectie.html#potten-en-styling" },
     ],
   },
 ];
@@ -134,12 +212,34 @@ export const promoTickerItems = [
   "Wij scoren een 4.8 op 2000+ reviews",
 ];
 
-export const serviceHighlights = [
-  "Nauwelijks van echt te onderscheiden",
-  "Geen water, zonlicht of onderhoud nodig",
-  "Stijlvol voor thuis, kantoor en hospitality",
-  "Snelle levering en persoonlijk stylingadvies",
+export const mainUSPs = [
+  {
+    id: "effortless",
+    icon: "auto_awesome",
+    title: "Timeless Perfection, Without Effort",
+    description: "Experience the beauty of nature without the need for watering, sunlight, or maintenance."
+  },
+  {
+    id: "realistic",
+    icon: "eco",
+    title: "Unrivaled Realistic Finish",
+    description: "Meticulously crafted with high-end materials to be indistinguishable from the real thing."
+  },
+  {
+    id: "atmosphere",
+    icon: "home",
+    title: "Instant Luxurious Atmosphere",
+    description: "Elevate your interior instantly with botanical statements that bring calm and character."
+  },
+  {
+    id: "premium",
+    icon: "diamond",
+    title: "High-Quality Premium Materials",
+    description: "Sustainable investment with durable, color-fast materials that last for years."
+  }
 ];
+
+export const serviceHighlights = mainUSPs.map(usp => usp.title);
 
 export const trustLogos = [
   "Maison Nord",
@@ -151,39 +251,39 @@ export const trustLogos = [
 
 export const categories = [
   {
-    name: "Grote kunstplanten",
-    description: "Statement pieces voor entrees, woonkamers en ontvangstruimtes.",
-    image: "/assets/images/category-large.svg",
+    name: "Large artificial plants",
+    description: "Statement pieces for entrances, living rooms and reception areas.",
+    image: "/assets/images/product-images/bananenplant_180cm_lifestyle.jpg",
     link: "/collectie.html#grote-kunstplanten",
-    count: "18 modellen",
+    count: "18 models",
   },
   {
-    name: "Kleine kunstplanten",
-    description: "Verfijnde accenten voor planken, tafels en stijlvolle hoekjes.",
-    image: "/assets/images/category-small.svg",
+    name: "Small artificial plants",
+    description: "Refined accents for shelves, tables and stylish corners.",
+    image: "/assets/images/product-images/column-cactus-livingroom.png",
     link: "/collectie.html#kleine-kunstplanten",
-    count: "12 modellen",
+    count: "12 models",
   },
   {
-    name: "Kunstbomen",
-    description: "Architecturale vormen met een rustige, luxe uitstraling.",
-    image: "/assets/images/category-trees.svg",
+    name: "Artificial trees",
+    description: "Architectural shapes with a calm, luxurious appearance.",
+    image: "/assets/images/product-images/artificial-olivetree.png",
     link: "/collectie.html#kunstbomen",
-    count: "9 modellen",
+    count: "9 models",
   },
   {
-    name: "Kunsthangplanten",
-    description: "Zachte gelaagdheid voor hospitality, retail en wooninterieurs.",
+    name: "Artificial hanging plants",
+    description: "Soft layering for hospitality, retail and residential interiors.",
     image: "/assets/images/category-hanging.svg",
     link: "/collectie.html#kunsthangplanten",
-    count: "7 modellen",
+    count: "7 models",
   },
   {
-    name: "Potten en styling",
-    description: "Afwerking in aardetinten, steenlook en moderne interieurmaterialen.",
+    name: "Pots and styling",
+    description: "Finished in earth tones, stone looks and modern interior materials.",
     image: "/assets/images/category-styling.svg",
     link: "/collectie.html#potten-en-styling",
-    count: "14 combinaties",
+    count: "14 models",
   },
 ];
 
@@ -191,19 +291,19 @@ export const featuredProducts = [
   {
     slug: "column-cactus",
     name: "Column Cactus",
-    category: "Kleine kunstplant",
+    category: "Small artificial plant",
     filter: "kleine-kunstplanten",
     price: 79,
     compareAtPrice: 95,
     height: "95 cm",
     potSize: "Ø 20 cm",
-    stockLabel: "Direct leverbaar",
-    image: "/assets/images/column-cactus-studio.png",
-    gallery: ["/assets/images/column-cactus-studio.png", "/assets/images/column-cactus-livingroom.png"],
+    stockLabel: "Directly available",
+    image: "/assets/images/product-images/column-cactus-studio.png",
+    gallery: ["/assets/images/product-images/column-cactus-studio.png", "/assets/images/product-images/column-cactus-livingroom.png"],
     media: {
-      primarySrc: "/assets/images/column-cactus-studio.png",
+      primarySrc: "/assets/images/product-images/column-cactus-studio.png",
       primaryAlt: "Column Cactus studiofoto op lichte achtergrond",
-      hoverSrc: "/assets/images/column-cactus-livingroom.png",
+      hoverSrc: "/assets/images/product-images/column-cactus-livingroom.png",
       hoverAlt: "Column Cactus in een moderne woonkamer",
       aspectRatio: "4 / 5",
       primaryFit: "cover",
@@ -212,7 +312,7 @@ export const featuredProducts = [
       hoverPosition: "center 42%",
     },
     description: "Een slanke sculpturale cactus voor moderne interieurs, balies en stylinghoeken die rust en karakter mogen krijgen.",
-    badges: ["Strakke vorm", "Onderhoudsvrij"],
+    badges: ["Strakke vorm", "Maintenance free"],
     rating: 4.7,
     reviewCount: 28,
     material: "Matte cactushuid met subtiele ribstructuur en verzwaarde potbasis",
@@ -243,26 +343,26 @@ export const featuredProducts = [
   {
     slug: "faux-olive-tree",
     name: "Faux Olive Tree",
-    category: "Kunstboom",
+    category: "Artificial tree",
     filter: "kunstbomen",
-    price: 229,
-    compareAtPrice: 259,
-    height: "190 cm",
+    price: 89.99,
+    compareAtPrice: 119.99,
+    height: "150 cm",
     potSize: "Ø 36 cm",
-    stockLabel: "Populair in projecten",
-    image: "/assets/images/artificial-olivetree-studio.png",
-    gallery: ["/assets/images/artificial-olivetree-studio.png", "/assets/images/artificial-olivetree.png"],
+    stockLabel: "Popular choice",
+    image: "/assets/images/product-images/artificial-olivetree-studio.png",
+    gallery: ["/assets/images/product-images/artificial-olivetree-studio.png", "/assets/images/product-images/artificial-olivetree.png"],
     media: {
-      primarySrc: "/assets/images/artificial-olivetree-studio.png",
+      primarySrc: "/assets/images/product-images/artificial-olivetree-studio.png",
       primaryAlt: "Faux Olive Tree studiofoto op witte achtergrond",
-      hoverSrc: "/assets/images/artificial-olivetree.png",
+      hoverSrc: "/assets/images/product-images/artificial-olivetree.png",
       hoverAlt: "Faux Olive Tree in een stijlvolle woonkamer",
       aspectRatio: "4 / 5",
       primaryFit: "contain",
       hoverFit: "cover",
     },
     description: "Zachte mediterrane elegantie voor woonkamers, horeca en ontvangstruimtes met een rustige designeruitstraling.",
-    badges: ["Zakelijk favoriet", "Realistische stamstructuur"],
+    badges: ["Business favoriet", "Realistische stamstructuur"],
     rating: 4.8,
     reviewCount: 61,
     material: "Fijne olijfbladeren, houten stamlook en luxe potbasis",
@@ -272,7 +372,7 @@ export const featuredProducts = [
       "Blijft jaarrond representatief zonder water of snoeiwerk",
     ],
     specs: [
-      { label: "Hoogte", value: "190 cm" },
+      { label: "Hoogte", value: "150 cm" },
       { label: "Potmaat", value: "Ø 36 cm" },
       { label: "Materiaal", value: "PE bladeren en composiet stam" },
       { label: "Toepassing", value: "Binnengebruik" },
@@ -293,19 +393,19 @@ export const featuredProducts = [
   {
     slug: "faux-monstera-plant",
     name: "Faux Monstera Plant",
-    category: "Grote kunstplant",
+    category: "Large artificial plant",
     filter: "grote-kunstplanten",
-    price: 169,
-    compareAtPrice: 199,
-    height: "155 cm",
+    price: 119.99,
+    compareAtPrice: 149.99,
+    height: "160 cm",
     potSize: "Ø 28 cm",
-    stockLabel: "Snelle levering",
-    image: "/assets/images/monstera-studio.png",
-    gallery: ["/assets/images/monstera-studio.png", "/assets/images/monstera-livingroom.png"],
+    stockLabel: "Fast delivery",
+    image: "/assets/images/product-images/monstera-studio.png",
+    gallery: ["/assets/images/product-images/monstera-studio.png", "/assets/images/product-images/monstera-livingroom.png"],
     media: {
-      primarySrc: "/assets/images/monstera-studio.png",
+      primarySrc: "/assets/images/product-images/monstera-studio.png",
       primaryAlt: "Faux Monstera Plant studiofoto op lichte achtergrond",
-      hoverSrc: "/assets/images/monstera-livingroom.png",
+      hoverSrc: "/assets/images/product-images/monstera-livingroom.png",
       hoverAlt: "Faux Monstera Plant in een stijlvolle woonkamer",
       aspectRatio: "4 / 5",
       primaryFit: "cover",
@@ -314,7 +414,7 @@ export const featuredProducts = [
       hoverPosition: "center 35%",
     },
     description: "Een tropische favoriet met grote, open bladeren voor woonkamers, salons en hospitality settings die zachtheid nodig hebben.",
-    badges: ["Tropische uitstraling", "Direct sfeer"],
+    badges: ["Tropische uitstraling", "Instant atmosphere"],
     rating: 4.8,
     reviewCount: 54,
     material: "Volle monstera-bladeren met natuurlijke glans en stevige stelen",
@@ -324,7 +424,7 @@ export const featuredProducts = [
       "Sterk toepasbaar in woon- en projectinterieurs",
     ],
     specs: [
-      { label: "Hoogte", value: "155 cm" },
+      { label: "Hoogte", value: "160 cm" },
       { label: "Potmaat", value: "Ø 28 cm" },
       { label: "Materiaal", value: "Textielblad en PE steel" },
       { label: "Toepassing", value: "Binnengebruik" },
@@ -345,19 +445,19 @@ export const featuredProducts = [
   {
     slug: "artificial-bougainvillea-tree",
     name: "Artificial Bougainvillea Tree",
-    category: "Kunstboom",
+    category: "Artificial tree",
     filter: "kunstbomen",
     price: 239,
     compareAtPrice: 279,
     height: "185 cm",
     potSize: "Ø 34 cm",
-    stockLabel: "Nieuwe favoriet",
-    image: "/assets/images/RozeboomStudio.png",
-    gallery: ["/assets/images/RozeboomStudio.png", "/assets/images/RozeboomWoon.png"],
+    stockLabel: "New favorite",
+    image: "/assets/images/product-images/RozeboomStudio.png",
+    gallery: ["/assets/images/product-images/RozeboomStudio.png", "/assets/images/product-images/RozeboomWoon.png"],
     media: {
-      primarySrc: "/assets/images/RozeboomStudio.png",
+      primarySrc: "/assets/images/product-images/RozeboomStudio.png",
       primaryAlt: "Artificial Bougainvillea Tree studiofoto op lichte achtergrond",
-      hoverSrc: "/assets/images/RozeboomWoon.png",
+      hoverSrc: "/assets/images/product-images/RozeboomWoon.png",
       hoverAlt: "Artificial Bougainvillea Tree in een stijlvolle woonkamer",
       aspectRatio: "4 / 5",
       primaryFit: "cover",
@@ -397,13 +497,13 @@ export const featuredProducts = [
   {
     slug: "artificial-tree-geranium",
     name: "Artificial Tree Geranium",
-    category: "Kunstboom",
+    category: "Artificial tree",
     filter: "kunstbomen",
     price: 219,
     compareAtPrice: 249,
     height: "170 cm",
     potSize: "Ø 30 cm",
-    stockLabel: "Projectselectie",
+    stockLabel: "Project selection",
     image: "/assets/images/product-geranium.svg",
     gallery: ["/assets/images/product-geranium.svg", "/assets/images/story-studio.svg"],
     description: "Een elegante bloeiende kunstboom voor verfijnde ontvangstruimtes, salons en high-end interieurs met zachte kleurtonen.",
@@ -438,16 +538,16 @@ export const featuredProducts = [
   {
     slug: "banana-plant",
     name: "Banana Plant",
-    category: "Grote kunstplant",
+    category: "Large artificial plant",
     filter: "grote-kunstplanten",
-    price: 199,
-    compareAtPrice: 229,
-    height: "185 cm",
+    price: 119.99,
+    compareAtPrice: 149.99,
+    height: "180 cm",
     potSize: "Ø 32 cm",
-    stockLabel: "Volle tropische look",
-    image: "/assets/images/banana-plant.png",
-    gallery: ["/assets/images/banana-plant.png", "/assets/images/hero-lounge.svg"],
-    imageMode: "contain",
+    stockLabel: "Full tropical look",
+    image: "/assets/images/product-images/bananenplant_180cm_studio.jpg",
+    gallery: ["/assets/images/product-images/bananenplant_180cm_studio.jpg", "/assets/images/product-images/bananenplant_180cm_lifestyle.jpg"],
+    imageMode: "cover",
     description: "Een krachtige tropische kunstplant met brede bladeren voor woonkamers, lobby's en stijlvolle projectruimtes.",
     badges: ["Grote bladeren", "Statement plant"],
     rating: 4.9,
@@ -459,7 +559,7 @@ export const featuredProducts = [
       "Mooie vervanger voor onderhoudsgevoelige echte bananenplanten",
     ],
     specs: [
-      { label: "Hoogte", value: "185 cm" },
+      { label: "Hoogte", value: "180 cm" },
       { label: "Potmaat", value: "Ø 32 cm" },
       { label: "Materiaal", value: "Textielblad en PE kern" },
       { label: "Toepassing", value: "Binnengebruik" },
@@ -480,15 +580,15 @@ export const featuredProducts = [
   {
     slug: "artificial-lemon-tree",
     name: "Artificial Lemon Tree",
-    category: "Kunstboom",
+    category: "Artificial tree",
     filter: "kunstbomen",
-    price: 249,
-    compareAtPrice: 289,
-    height: "180 cm",
-    potSize: "Ø 34 cm",
-    stockLabel: "Seizoensfavoriet",
-    image: "/assets/images/product-lemon.svg",
-    gallery: ["/assets/images/product-lemon.svg", "/assets/images/business-space.svg"],
+    price: 94.99,
+    compareAtPrice: 129.99,
+    height: "120 cm",
+    potSize: "Ø 22 cm",
+    stockLabel: "Seasonal favorite",
+    image: "/assets/images/product-images/citroenboom_180cm_studio.jpg?v=2",
+    gallery: ["/assets/images/product-images/citroenboom_180cm_studio.jpg?v=2", "/assets/images/product-images/citroenboom_180cm_lifestyle.jpg?v=2"],
     description: "Een mediterrane kunstboom met frisse, stijlvolle uitstraling voor keukens, horeca en zonnige interieurs.",
     badges: ["Mediterrane sfeer", "Design favoriet"],
     rating: 4.8,
@@ -500,8 +600,8 @@ export const featuredProducts = [
       "Perfect voor een mediterraan of boutique interieurgevoel",
     ],
     specs: [
-      { label: "Hoogte", value: "180 cm" },
-      { label: "Potmaat", value: "Ø 34 cm" },
+      { label: "Hoogte", value: "120 cm" },
+      { label: "Potmaat", value: "Ø 22 cm" },
       { label: "Materiaal", value: "PE blad, textielaccenten en composiet stam" },
       { label: "Toepassing", value: "Binnengebruik" },
     ],
@@ -518,6 +618,198 @@ export const featuredProducts = [
       },
     ],
   },
+  {
+    slug: "ficus-plant",
+    name: "Ficus Plant",
+    category: "Large artificial plant",
+    filter: "grote-kunstplanten",
+    price: 74.99,
+    compareAtPrice: 89.99,
+    height: "150 cm",
+    potSize: "Ø 24 cm",
+    stockLabel: "Fast delivery",
+    image: "/assets/images/product-images/ficus_180cm_studio.jpg",
+    gallery: ["/assets/images/product-images/ficus_180cm_studio.jpg", "/assets/images/product-images/ficus_180cm_lifestyle.jpg"],
+    media: {
+      primarySrc: "/assets/images/product-images/ficus_180cm_studio.jpg",
+      primaryAlt: "Ficus studiofoto",
+      hoverSrc: "/assets/images/product-images/ficus_180cm_lifestyle.jpg",
+      hoverAlt: "Ficus in interieur",
+      aspectRatio: "4 / 5",
+      primaryFit: "cover",
+      hoverFit: "cover",
+    },
+    description: "Een levensechte Ficus die elke ruimte voorziet van een stevige, groene basis. Ideaal voor zowel woonkamers als zakelijke projecten.",
+    badges: ["Diepgroene bladeren", "Veelzijdige stijl"],
+    rating: 4.8,
+    reviewCount: 42,
+    material: "Natuurgetrouw groen PE blad met gedetailleerde nerf",
+    features: [
+      "Brengt direct textuur en structuur in het interieur",
+      "Sterk in hospitality, woningen en ontvangstruimtes",
+      "Blijft jarenlang mooi zonder dat het bladeren verliest"
+    ],
+    specs: [
+      { label: "Hoogte", value: "150 cm" },
+      { label: "Potmaat", value: "Ø 24 cm" },
+      { label: "Materiaal", value: "Premium PE mix" },
+      { label: "Toepassing", value: "Binnengebruik" }
+    ],
+    reviews: []
+  },
+  {
+    slug: "strelitzia-plant",
+    name: "Strelitzia",
+    category: "Large artificial plant",
+    filter: "grote-kunstplanten",
+    price: 99.99,
+    compareAtPrice: 129.99,
+    height: "160 cm",
+    potSize: "Ø 26 cm",
+    stockLabel: "Popular choice",
+    image: "/assets/images/product-images/strelitzia_150cm_studio.jpg",
+    gallery: ["/assets/images/product-images/strelitzia_150cm_studio.jpg", "/assets/images/product-images/strelitzia_150cm_lifestyle.jpg"],
+    media: {
+      primarySrc: "/assets/images/product-images/strelitzia_150cm_studio.jpg",
+      primaryAlt: "Strelitzia studiofoto",
+      hoverSrc: "/assets/images/product-images/strelitzia_150cm_lifestyle.jpg",
+      hoverAlt: "Strelitzia in interieur",
+      aspectRatio: "4 / 5",
+      primaryFit: "cover",
+      hoverFit: "cover",
+    },
+    description: "Een opvallende Strelitzia met grote, elegante bladeren. Perfect om een exotisch accent aan de ruimte toe te voegen.",
+    badges: ["Exotisch effect", "Grote bladeren"],
+    rating: 4.9,
+    reviewCount: 56,
+    material: "Grote textielbladeren met natuurgetrouwe nerven",
+    features: [
+      "Voegt een statig en tropisch karakter toe",
+      "Zeer geschikt voor minimalistische interieurs",
+      "Maintenance free"
+    ],
+    specs: [
+      { label: "Hoogte", value: "160 cm" },
+      { label: "Potmaat", value: "Ø 26 cm" },
+      { label: "Materiaal", value: "Textiel en PE" },
+      { label: "Toepassing", value: "Binnengebruik" }
+    ],
+    reviews: []
+  },
+  {
+    slug: "kunstpalm",
+    name: "Kunstpalm",
+    category: "Large artificial plant",
+    filter: "grote-kunstplanten",
+    price: 104.99,
+    compareAtPrice: 139.99,
+    height: "150 cm",
+    potSize: "Ø 26 cm",
+    stockLabel: "Fast delivery",
+    image: "/assets/images/product-images/kunstpalm_180cm_studio.jpg",
+    gallery: ["/assets/images/product-images/kunstpalm_180cm_studio.jpg", "/assets/images/product-images/kunstpalm_180cm_lifestyle.jpg"],
+    media: {
+      primarySrc: "/assets/images/product-images/kunstpalm_180cm_studio.jpg",
+      primaryAlt: "Kunstpalm studiofoto",
+      hoverSrc: "/assets/images/product-images/kunstpalm_180cm_lifestyle.jpg",
+      hoverAlt: "Kunstpalm in interieur",
+      aspectRatio: "4 / 5",
+      primaryFit: "cover",
+      hoverFit: "cover",
+    },
+    description: "Creëer een oase van rust met deze volumineuze Kunstpalm.",
+    badges: ["Volumineuze kroon", "Zomerse sfeer"],
+    rating: 4.7,
+    reviewCount: 31,
+    material: "Fijn waaiervormig blad",
+    features: [
+      "Ideaal als groene afscheiding",
+      "Premium afwerking voor een realistische look"
+    ],
+    specs: [
+      { label: "Hoogte", value: "150 cm" },
+      { label: "Potmaat", value: "Ø 26 cm" },
+      { label: "Materiaal", value: "PE mix" },
+      { label: "Toepassing", value: "Binnengebruik" }
+    ],
+    reviews: []
+  },
+  {
+    slug: "sinaasappelplant",
+    name: "Orange Plant",
+    category: "Artificial tree",
+    filter: "kunstbomen",
+    price: 89.99,
+    compareAtPrice: 119.99,
+    height: "120 cm",
+    potSize: "Ø 22 cm",
+    stockLabel: "Mediterranean style",
+    image: "/assets/images/product-images/sinaasappelboom_180cm_studio.jpg",
+    gallery: ["/assets/images/product-images/sinaasappelboom_180cm_studio.jpg", "/assets/images/product-images/sinaasappelboom_180cm_lifestyle.jpg"],
+    media: {
+      primarySrc: "/assets/images/product-images/sinaasappelboom_180cm_studio.jpg",
+      primaryAlt: "Orange Plant studiofoto",
+      hoverSrc: "/assets/images/product-images/sinaasappelboom_180cm_lifestyle.jpg",
+      hoverAlt: "Orange Plant in interieur",
+      aspectRatio: "4 / 5",
+      primaryFit: "cover",
+      hoverFit: "cover",
+    },
+    description: "Breng mediterrane warmte in huis met deze Orange Plant.",
+    badges: ["Kleurig detail", "Frisse look"],
+    rating: 4.8,
+    reviewCount: 20,
+    material: "Detailrijke vruchten",
+    features: [
+      "Voegt warmte toe",
+      "Constante kwaliteit"
+    ],
+    specs: [
+      { label: "Hoogte", value: "120 cm" },
+      { label: "Potmaat", value: "Ø 22 cm" },
+      { label: "Materiaal", value: "PE en textiel" },
+      { label: "Toepassing", value: "Binnengebruik" }
+    ],
+    reviews: []
+  },
+  {
+    slug: "bamboeplant",
+    name: "Bambooplant",
+    category: "Large artificial plant",
+    filter: "grote-kunstplanten",
+    price: 89.99,
+    compareAtPrice: 115.99,
+    height: "150 cm",
+    potSize: "Ø 24 cm",
+    stockLabel: "Oriental tranquility",
+    image: "/assets/images/product-images/bamboe_150cm_studio.jpg",
+    gallery: ["/assets/images/product-images/bamboe_150cm_studio.jpg", "/assets/images/product-images/bamboe_150cm_lifestyle.jpg"],
+    media: {
+      primarySrc: "/assets/images/product-images/bamboe_150cm_studio.jpg",
+      primaryAlt: "Bambooplant studiofoto",
+      hoverSrc: "/assets/images/product-images/bamboe_150cm_lifestyle.jpg",
+      hoverAlt: "Bambooplant in interieur",
+      aspectRatio: "4 / 5",
+      primaryFit: "cover",
+      hoverFit: "cover",
+    },
+    description: "Een volle Bambooplant met een hoge stengeldichtheid.",
+    badges: ["Bamboohout", "Fijne stengels"],
+    rating: 4.8,
+    reviewCount: 33,
+    material: "Natuurlijke bamboestengels",
+    features: [
+      "Licht, open karakter",
+      "Direct rust"
+    ],
+    specs: [
+      { label: "Hoogte", value: "150 cm" },
+      { label: "Potmaat", value: "Ø 24 cm" },
+      { label: "Materiaal", value: "Natuurlijke stammen" },
+      { label: "Toepassing", value: "Binnengebruik" }
+    ],
+    reviews: []
+  }
 ];
 
 export const uspItems = [
@@ -539,10 +831,10 @@ export const uspItems = [
   },
 ];
 
-export const whyPlantBrothers = [
+export const why4EverPlants = [
   "Geselecteerd op realisme, vormgevoel en materiaalbeleving.",
   "Premium collectie die rust en verfijning toevoegt aan elke ruimte.",
-  "Onderhoudsvrije oplossingen voor thuis, hospitality en kantoor.",
+  "Maintenance freee oplossingen voor thuis, hospitality en kantoor.",
   "Persoonlijk advies voor styling, formaat en toepassing.",
 ];
 
@@ -554,7 +846,7 @@ export const testimonials = [
     rating: 5,
   },
   {
-    quote: "We wilden wel groen, maar geen gedoe. PlantBrothers leverde precies die rustige premium uitstraling die we zochten.",
+    quote: "We wilden wel groen, maar geen gedoe. 4EverPlants leverde precies die rustige premium uitstraling die we zochten.",
     name: "David van Loon",
     role: "Operations Manager, boutique hotel",
     rating: 5,
@@ -569,57 +861,57 @@ export const testimonials = [
 
 export const comparisonPoints = [
   {
-    title: "Voor PlantBrothers",
+    title: "Voor 4EverPlants",
     text: "Een ruimte zonder groen voelt sneller vlak, minder warm en minder verzorgd aan.",
   },
   {
-    title: "Na PlantBrothers",
+    title: "Na 4EverPlants",
     text: "Met hoogwaardige artificial plants ontstaat direct meer rust, karakter en een verzorgde premium uitstraling.",
   },
 ];
 
 export const businessBenefits = [
-  "Representatieve ruimtes zonder onderhoudskosten of uitval van beplanting.",
-  "Ideaal voor kantoren, horeca, salons, showrooms en wachtruimtes.",
-  "Consistente sfeer in ruimtes met weinig daglicht of wisselende temperaturen.",
-  "Maatwerkadvies voor formaat, styling, plaatsing en combinatie met potten.",
+  "Representative spaces without maintenance costs or loss of planting.",
+  "Ideal for offices, catering, salons, showrooms and waiting areas.",
+  "Consistent atmosphere in rooms with little daylight or fluctuating temperatures.",
+  "Customized advice for size, styling, placement and combination with pots.",
 ];
 
 export const artificialPlantInfo = [
   {
-    title: "Stijl zonder inspanning",
-    text: "Artificial plants geven een ruimte direct warmte en balans, zonder dat je rekening hoeft te houden met water, daglicht of seizoenswisselingen.",
+    title: "Style without effort",
+    text: "Artificial plants immediately give a room warmth and balance, without you having to take into account water, daylight or seasonal changes.",
   },
   {
-    title: "Duurzaam mooi in gebruik",
-    text: "Voor drukke huishoudens, hospitality en kantoren zijn kunstplanten een slimme keuze: ze blijven verzorgd ogen en vragen nauwelijks onderhoud.",
+    title: "Sustainably beautiful in use",
+    text: "Artificial plants are a smart choice for busy households, hospitality and offices: they continue to look well-cared for and require hardly any maintenance.",
   },
   {
-    title: "Altijd passend te stylen",
-    text: "Van een subtiele hoekplant tot een grote statementboom: je creëert eenvoudig een premium sfeer die past bij jouw interieurconcept.",
+    title: "Always stylable to suit",
+    text: "From a subtle corner plant to a large statement tree: you easily create a premium atmosphere that fits your interior concept.",
   },
 ];
 
 export const faqs = [
   {
-    question: "Hoe onderhoud ik artificial plants het beste?",
-    answer: "Een zachte doek of plumeau is meestal voldoende. Voor een grondigere opfrisbeurt kun je de bladeren afnemen met een licht vochtige doek.",
+    question: "How do I best maintain artificial plants?",
+    answer: "A soft cloth or duster is usually sufficient. For a more thorough freshening up, you can wipe the leaves with a slightly damp cloth.",
   },
   {
-    question: "Hoe lang blijven kunstplanten mooi?",
-    answer: "Bij normaal binnengebruik blijven hoogwaardige artificial plants jarenlang stijlvol. Vermijd langdurige directe zon om verkleuring te beperken.",
+    question: "How long do artificial plants stay beautiful?",
+    answer: "With normal indoor use, high-quality artificial plants remain stylish for years. Avoid prolonged direct sun to limit discoloration.",
   },
   {
-    question: "Zijn de kunstplanten geschikt voor kantoor of horeca?",
-    answer: "Ja. Juist in zakelijke ruimtes zijn ze populair omdat ze altijd representatief blijven zonder dagelijkse verzorging of uitval.",
+    question: "Are the artificial plants suitable for the office or catering industry?",
+    answer: "Yes. They are particularly popular in business spaces because they always remain representative without daily care or failure.",
   },
   {
-    question: "Hoe worden de planten geleverd?",
-    answer: "Onze planten worden zorgvuldig verpakt geleverd. Veel modellen zijn direct klaar om in een sierpot of stylingopstelling te plaatsen.",
+    question: "How are the plants delivered?",
+    answer: "Our plants are delivered carefully packaged. Many models are ready to be placed directly in a decorative pot or styling arrangement.",
   },
   {
-    question: "Kan ik advies krijgen over formaat en styling?",
-    answer: "Zeker. We helpen graag bij de juiste schaal, plaatsing en combinatie met potten voor een rustige en hoogwaardige uitstraling.",
+    question: "Can I get advice on size and styling?",
+    answer: "Certainly. We are happy to help with the right scale, placement and combination with pots for a calm and high-quality appearance.",
   },
 ];
 
@@ -629,7 +921,7 @@ export const blogPosts = [
     category: "Inspiratie",
     excerpt: "Ontdek hoe hoogwaardige kunstplanten rust, volume en een verzorgde sfeer toevoegen zonder onderhoud of concessies.",
     image: "/assets/images/hero-plant-atrium.svg",
-    href: "/contact.html",
+    href: "#",
     meta: "4 min leestijd",
   },
   {
@@ -637,7 +929,7 @@ export const blogPosts = [
     category: "Stylingtips",
     excerpt: "Van schaalverhouding tot potkeuze: met een paar slimme keuzes oogt een ruimte direct zachter en luxer.",
     image: "/assets/images/story-studio.svg",
-    href: "/contact.html",
+    href: "#",
     meta: "5 min leestijd",
   },
   {
@@ -645,7 +937,7 @@ export const blogPosts = [
     category: "Onderhoud",
     excerpt: "Met minimale inspanning houd je artificial plants stofvrij en representatief, zowel thuis als in zakelijke settings.",
     image: "/assets/images/business-space.svg",
-    href: "/contact.html",
+    href: "#",
     meta: "3 min leestijd",
   },
 ];
@@ -654,28 +946,28 @@ export const footerGroups = [
   {
     title: "Shop",
     links: [
-      { label: "Kleine planten", href: "/collectie.html#kleine-kunstplanten" },
-      { label: "Grote planten", href: "/collectie.html#grote-kunstplanten" },
-      { label: "Bomen", href: "/collectie.html#kunstbomen" },
-      { label: "Wandplanten", href: "/collectie.html#kunsthangplanten" },
+      { label: "Small plants", href: "/collectie.html#kleine-kunstplanten" },
+      { label: "Large plants", href: "/collectie.html#grote-kunstplanten" },
+      { label: "Trees", href: "/collectie.html#kunstbomen" },
+      { label: "Hanging plants", href: "/collectie.html#kunsthangplanten" },
     ],
   },
   {
-    title: "Bedrijf",
+    title: "Company",
     links: [
-      { label: "Over ons", href: "/over-ons.html" },
+      { label: "About Us", href: "/over-ons.html" },
       { label: "Contact", href: "/contact.html" },
-      { label: "Blog", href: "/contact.html" },
-      { label: "Zakelijk", href: "/zakelijk.html" },
+      { label: "Blog", href: "#" },
+      { label: "Business", href: "/zakelijk.html" },
     ],
   },
   {
-    title: "Klantenservice",
+    title: "Customer Service",
     links: [
-      { label: "Verzending & retourneren", href: "/contact.html" },
-      { label: "Veelgestelde vragen", href: "/contact.html" },
-      { label: "Privacybeleid", href: "/contact.html" },
-      { label: "Algemene voorwaarden", href: "/contact.html" },
+      { label: "Shipping & Returns", href: "/verzending-retour.html" },
+      { label: "Frequently Asked Questions", href: "/contact.html#faq" },
+      { label: "Privacy Policy", href: "/privacy-policy.html" },
+      { label: "Terms of Service", href: "/terms.html" },
     ],
   },
 ];

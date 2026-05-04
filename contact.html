@@ -1,95 +1,86 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="nl">
   <head>
-    <meta charset="UTF-8" />
+    <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Contact | PlantBrothers</title>
-    <meta
-      name="description"
-      content="Neem contact op met PlantBrothers voor advies over hoogwaardige kunstplanten voor thuis, kantoor en zakelijke projecten."
-    />
-    <meta property="og:title" content="Contact | PlantBrothers" />
-    <meta
-      property="og:description"
-      content="Vraag advies of een maatwerkvoorstel aan voor premium kunstplanten."
-    />
+    <title>Contact | 4EverPlants - Premium Artifical Plants</title>
+    <meta name="description" content="Neem contact op voor advies over premium artificial plants. Wij helpen u graag met styling en schaalverhoudingen." />
+    <!-- Meta Tags -->
+    <meta property="og:title" content="Contact | 4EverPlants" />
     <meta property="og:type" content="website" />
     <meta property="og:image" content="/assets/images/category-styling.svg" />
-    <link rel="stylesheet" href="/src/styles/main.css?v=20260317c" />
-    <script type="module" src="/src/scripts/main.js?v=20260317c"></script>
+    <link rel="stylesheet" href="/src/styles/main.css?v=20260503" />
+    <script type="module" src="/src/scripts/main.js?v=20260503"></script>
   </head>
   <body>
     <div data-header-root></div>
 
     <main>
-      <section class="page-hero">
-        <div class="container page-hero-inner reveal">
-          <p class="eyebrow">Contact</p>
-          <h1>Vertel ons welke sfeer je wilt neerzetten</h1>
-          <p class="lead">
-            We helpen je graag met advies over formaat, toepassing, stijl en een passende selectie kunstplanten voor thuis
-            of zakelijk gebruik.
-          </p>
+      <header class="page-header">
+        <div class="container reveal">
+          <p class="eyebrow uppercase-spaced">Contact & Advice</p>
+          <h1>How can we help you?</h1>
+          <p class="lead lead--lg" data-i18n="contact.lead">Do you have a question about a product, want styling advice, or need to submit a business request? We are happy to help you.</p>
         </div>
-      </section>
+      </header>
 
       <section class="section">
-        <div class="container contact-grid">
-          <article class="contact-card reveal">
-            <div class="card-body">
-              <p class="eyebrow">Stuur een bericht</p>
-              <h2>We denken graag met je mee</h2>
-              <form class="contact-form" data-contact-form novalidate>
-                <div class="contact-form-grid">
-                  <div class="field">
-                    <label for="name">Naam</label>
-                    <input id="name" name="name" type="text" required />
-                  </div>
-                  <div class="field">
-                    <label for="email">E-mailadres</label>
-                    <input id="email" name="email" type="email" required />
-                  </div>
-                </div>
-                <div class="field">
-                  <label for="company">Bedrijf of projectnaam</label>
-                  <input id="company" name="company" type="text" />
-                </div>
-                <div class="field">
-                  <label for="interest">Waar ben je naar op zoek?</label>
-                  <select id="interest" name="interest">
-                    <option>Advies voor thuis</option>
-                    <option>Zakelijke aanvraag</option>
-                    <option>Styling en potten</option>
-                    <option>Algemene vraag</option>
-                  </select>
-                </div>
-                <div class="field">
-                  <label for="message">Bericht</label>
-                  <textarea id="message" name="message" required placeholder="Vertel kort iets over de ruimte, stijl of gewenste toepassing."></textarea>
-                </div>
-                <button class="button button-primary" type="submit">Verstuur aanvraag</button>
-                <p class="form-feedback" data-form-feedback aria-live="polite"></p>
-              </form>
-            </div>
-          </article>
-
-          <div class="contact-stack">
-            <article class="contact-card reveal">
-              <div class="card-body">
+        <div class="container split-grid" style="align-items: flex-start;">
+          <div class="content-surface reveal">
+            <p class="eyebrow">Send message</p>
+            <h2>Ask your question</h2>
+            <form class="contact-form" data-contact-form novalidate>
+              <div class="form-field">
+                <label for="name">Your name</label>
+                <input id="name" name="name" type="text" placeholder="Full name" required />
+              </div>
+              <div class="form-field">
+                <label for="email">Email address</label>
+                <input id="email" name="email" type="email" placeholder="email@example.com" required />
+              </div>
+              <div class="form-field">
+                <label for="interest">Question regarding</label>
+                <select id="interest" name="interest">
+                  <option>Private advice</option>
+                  <option>Business project</option>
+                  <option>Styling & Pots</option>
+                  <option>Other</option>
+                </select>
+              </div>
+              <div class="form-field">
+                <label for="message">Your message</label>
+                <textarea id="message" name="message" rows="5" placeholder="Your question or project description..." required></textarea>
+              </div>
+              <button type="submit" class="btn btn-primary" style="width: 100%;">Send message</button>
+              <p class="form-feedback" data-form-feedback aria-live="polite" style="margin-top: 1rem;"></p>
+            </form>
+          </div>
+          
+          <div class="reveal delay-1">
+             <div class="content-surface" style="margin-bottom: 2rem;">
                 <p class="eyebrow">Direct contact</p>
-                <h2>Contactgegevens</h2>
-                <p><strong>E-mail:</strong><br /><a href="mailto:hallo@plantbrothers.nl">hallo@plantbrothers.nl</a></p>
-                <p><strong>Telefoon:</strong><br /><a href="tel:+31201234567">+31 (0)20 123 45 67</a></p>
-                <p><strong>Adres:</strong><br />Keizersgracht 214, 1016 DZ Amsterdam</p>
-              </div>
-            </article>
-            <article class="contact-card reveal">
-              <div class="card-body">
-                <p class="eyebrow">Veelgestelde vragen</p>
-                <h2>Veelvoorkomende vragen</h2>
-                <div class="faq-stack" data-faq-grid></div>
-              </div>
-            </article>
+                <h2>Company details</h2>
+                <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+                   <div>
+                      <p style="font-weight: 700; margin-bottom: 0.25rem;">Email</p>
+                      <a href="mailto:info@4everplants.nl" class="text-link">info@4everplants.nl</a>
+                   </div>
+                   <div>
+                      <p style="font-weight: 700; margin-bottom: 0.25rem;">Phone</p>
+                      <a href="tel:+31261234567" class="text-link">+31 (0)26 123 45 67</a>
+                   </div>
+                   <div>
+                      <p style="font-weight: 700; margin-bottom: 0.25rem;">Showroom (by appointment)</p>
+                      <p>Eimerssingel-oost 25C<br>6834CX Arnhem</p>
+                   </div>
+                </div>
+             </div>
+             
+             <div class="content-surface" id="faq">
+                <p class="eyebrow">FAQ</p>
+                <h3>Frequently asked questions</h3>
+                <div class="faq-stack" data-faq-grid style="margin-top: 1.5rem;"></div>
+             </div>
           </div>
         </div>
       </section>
@@ -98,5 +89,6 @@
     </main>
 
     <div data-footer-root></div>
+    <div data-popup-root></div>
   </body>
 </html>

@@ -1,4 +1,4 @@
-# PlantBrothers
+# 4EverPlants
 
 Premium, responsive merkwebsite voor hoogwaardige kunstplanten. De site is opgebouwd met semantische HTML, modulaire JavaScript-bestanden, herbruikbare componenten en een centrale dataset als basis voor latere webshopuitbreiding.
 

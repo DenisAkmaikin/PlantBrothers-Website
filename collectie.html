@@ -1,88 +1,61 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="nl">
   <head>
-    <meta charset="UTF-8" />
+    <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Collectie | PlantBrothers</title>
-    <meta
-      name="description"
-      content="Bekijk de premium collectie kunstplanten van PlantBrothers: grote kunstplanten, kleine modellen, kunstbomen, hangplanten en styling."
-    />
-    <meta property="og:title" content="Collectie | PlantBrothers" />
-    <meta
-      property="og:description"
-      content="Premium gepresenteerde kunstplanten voor stijlvolle woon- en zakelijke ruimtes."
-    />
+    <title>Collectie | 4EverPlants - Premium Artifical Plants</title>
+    <meta name="description" content="Ontdek onze zorgvuldig samengestelde collectie premium artificial plants. Van statement-bomen tot verfijnde kantoorbeplanting." />
+    <!-- Meta Tags -->
+    <meta property="og:title" content="Collectie | 4EverPlants" />
     <meta property="og:type" content="website" />
     <meta property="og:image" content="/assets/images/product-strelitzia.svg" />
-    <link rel="stylesheet" href="/src/styles/main.css?v=20260317c" />
-    <script type="module" src="/src/scripts/main.js?v=20260317c"></script>
+    <link rel="stylesheet" href="/src/styles/main.css?v=20260503" />
+    <script type="module" src="/src/scripts/main.js?v=20260503"></script>
   </head>
   <body>
     <div data-header-root></div>
 
     <main>
-      <section class="page-hero">
-        <div class="container page-hero-inner reveal">
-          <p class="eyebrow">Collectie</p>
-          <h1>Een zorgvuldig samengestelde collectie premium kunstplanten</h1>
-          <p class="lead">
-            Ontdek modellen die geselecteerd zijn op realistische uitstraling, hoogwaardige materialen en een rustige luxe
-            presentatie. Klaar om later uit te breiden met volledige webshopfunctionaliteit.
-          </p>
+      <header class="page-header">
+        <div class="container reveal">
+          <p class="eyebrow uppercase-spaced">Botanical Selection</p>
+          <h1>Our Collection</h1>
+          <p class="lead lead--lg" data-i18n="collection.lead">Lifelike reproductions that are almost indistinguishable from the real thing. Made for interiors seeking atmosphere and tranquility, without the burden of maintenance.</p>
         </div>
-      </section>
+      </header>
 
       <section class="section">
         <div class="container">
           <div class="filter-row reveal">
-            <a class="filter-chip" data-filter="all" href="#producten">Alles</a>
-            <a class="filter-chip" data-filter="grote-kunstplanten" href="#grote-kunstplanten">Grote kunstplanten</a>
-            <a class="filter-chip" data-filter="kleine-kunstplanten" href="#kleine-kunstplanten">Kleine kunstplanten</a>
-            <a class="filter-chip" data-filter="kunstbomen" href="#kunstbomen">Kunstbomen</a>
-            <a class="filter-chip" data-filter="kunsthangplanten" href="#kunsthangplanten">Kunsthangplanten</a>
-            <a class="filter-chip" data-filter="potten-en-styling" href="#potten-en-styling">Potten en styling</a>
+            <button class="filter-chip active" data-filter="all">All</button>
+            <button class="filter-chip" data-filter="grote-kunstplanten">Large plants</button>
+            <button class="filter-chip" data-filter="kleine-kunstplanten">Small plants</button>
+            <button class="filter-chip" data-filter="kunstbomen">Trees</button>
+            <button class="filter-chip" data-filter="kunsthangplanten">Hanging plants</button>
+            <button class="filter-chip" data-filter="potten-en-styling">Styling</button>
           </div>
-          <div class="service-grid" data-service-grid></div>
-        </div>
-      </section>
-
-      <section class="section">
-        <div class="container">
-          <div class="card-grid" data-category-grid></div>
-        </div>
-      </section>
-
-      <section class="section alt" id="producten">
-        <div class="container">
-          <div class="section-heading">
-            <div>
-              <p class="eyebrow">Assortiment</p>
-              <h2>Uitgelichte producten</h2>
-            </div>
+          
+          <div class="product-carousel" data-collection-grid></div>
+          
+          <div class="empty-state" data-empty-state hidden style="text-align: center; padding: 4rem 0;">
+            <p style="font-size: 1.25rem; color: var(--color-on-surface-variant);" data-i18n="collection.empty">We will soon add more products to this category. <br>Do you have a question right away? Feel free to contact us.</p>
           </div>
-          <div class="collection-grid" data-collection-grid></div>
-          <p class="empty-state" data-empty-state hidden>
-            Voor deze categorie voegen we binnenkort voorbeeldproducten toe. Neem contact op voor maatwerk of stylingadvies.
-          </p>
         </div>
       </section>
 
-      <section class="section">
+      <section class="section bg-surface-low">
         <div class="container">
-          <div class="cta-banner reveal">
-            <div>
-              <p class="eyebrow">Maatwerk</p>
-              <h2>Hulp nodig bij selectie of styling?</h2>
-              <p>
-                We adviseren graag over formaat, toepassing, materiaalbeleving en een passende combinatie met potten of
-                zakelijke inrichting.
-              </p>
+          <div class="newsletter-bento reveal">
+            <div class="newsletter-content-inner">
+               <p class="eyebrow uppercase-spaced">Service</p>
+               <h2>Advice to scale</h2>
+               <p>Are you unsure about the size of a plant for your space? Our stylists are happy to help you with the right proportions and the best combinations for your interior.</p>
+               <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                 <a href="/contact.html" class="btn btn-primary">Contact us</a>
+                 <a href="/zakelijk.html" class="btn btn-secondary">Project request</a>
+               </div>
             </div>
-            <div class="button-row">
-              <a class="button button-primary" href="/contact.html">Vraag advies aan</a>
-              <a class="button button-secondary" href="/zakelijk.html">Voor zakelijke projecten</a>
-            </div>
+            <img src="/assets/images/product-images/bananenplant_180cm_lifestyle.jpg" alt="Service styling" class="newsletter-image" />
           </div>
         </div>
       </section>
@@ -91,5 +64,6 @@
     </main>
 
     <div data-footer-root></div>
+    <div data-popup-root></div>
   </body>
 </html>

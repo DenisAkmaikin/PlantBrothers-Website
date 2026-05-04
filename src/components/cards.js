@@ -1,81 +1,61 @@
-import { createProductImageComponent } from "./product-image.js?v=20260317c";
+import { createProductImageComponent } from "./product-image.js?v=20260503";
+import { t } from "../data/translations.js?v=20260503";
+import { formatPrice } from "../scripts/cart-store.js?v=20260503";
 
-export function createCategoryCard(category) {
+export function createCategoryCard(category, index) {
+  const isMiddle = index === 1;
+  const mtClass = isMiddle ? " bento-card--offset" : "";
+  
   return `
-    <article class="card category-card reveal">
-      <div class="card-media-wrap">
-        <img class="card-image" src="${category.image}" alt="${category.name}" loading="lazy" />
-      </div>
-      <div class="card-body">
-        <p class="eyebrow">Collectie</p>
-        <h3>${category.name}</h3>
-        <p>${category.description}</p>
-        <p class="card-kicker">${category.count}</p>
-        <a class="text-link" href="${category.link}">Bekijk categorie</a>
+    <article class="bento-card reveal${mtClass}">
+      <img class="bento-image" src="${category.image}" alt="${t(category.name)}" loading="lazy" />
+      <div class="bento-overlay">
+        <h3>${t(category.name)}</h3>
+        <p>${t(category.description)}</p>
+        <a class="bento-button" href="${category.link}" aria-label="${t("View")} ${t(category.name)}">
+          <span class="material-symbols-outlined">north_east</span>
+        </a>
       </div>
     </article>
   `;
 }
 
 export function createProductCard(product, options = {}) {
-  const { variant = "default" } = options;
-  const isFeatured = variant === "featured";
-  const badges = product.badges.map((badge) => `<span class="badge">${badge}</span>`).join("");
+  const isFeatured = options.variant === "featured";
+  const badges = product.badges.map((badge) => `<span class="badge">${t(badge)}</span>`).join("");
   const stars = "★★★★★";
   const imageMarkup = product.media
     ? createProductImageComponent({
         ...product.media,
-        className: `product-image-switch--card${isFeatured ? " product-image-switch--featured" : ""}`,
+        className: "product-image-switch--card",
       })
-    : `<img class="${product.imageMode === "contain" ? "card-image card-image-contain" : "card-image"}" src="${product.image}" alt="${product.name}" loading="lazy" />`;
+    : `<img class="card-image" src="${product.image}" alt="${product.name}" loading="lazy" />`;
 
-  if (isFeatured) {
-    const badgeLabel = product.badges[0] || "Featured";
-    return `
-      <article class="card product-card product-card--featured reveal" data-product-category="${product.filter}">
-        <a class="product-image-wrap" href="/product-detail.html?slug=${product.slug}" aria-label="${product.name}">
-          <div class="card-media-wrap">
-            ${imageMarkup}
-            <span class="featured-card-badge">${badgeLabel}</span>
-          </div>
-        </a>
-        <div class="card-body card-body--compact">
-          <h3>${product.name}</h3>
-          <div class="product-footer product-footer--featured">
-            <strong>${new Intl.NumberFormat("nl-NL", { style: "currency", currency: "EUR", minimumFractionDigits: 0 }).format(product.price)}</strong>
-            <a class="featured-card-link" href="/product-detail.html?slug=${product.slug}">Bekijk details</a>
-          </div>
-        </div>
-      </article>
-    `;
-  }
+  const descriptionHtml = isFeatured ? "" : `<p class="product-description">${t(product.description)}</p>`;
 
   return `
-    <article class="card product-card reveal" data-product-category="${product.filter}">
-      <a class="product-image-wrap" href="/product-detail.html?slug=${product.slug}" aria-label="${product.name}">
-        <div class="card-media-wrap">
-          ${imageMarkup}
-          <span class="product-hover-badge">Bekijk product</span>
-        </div>
+    <article class="product-card reveal ${isFeatured ? "product-card--featured" : ""}" data-product-category="${product.filter}">
+      <a class="product-image-wrap" href="/product-detail.html?slug=${product.slug}" aria-label="${t(product.name)}">
+        ${imageMarkup}
       </a>
-      <div class="card-body">
-        <div class="rating-row" aria-label="${product.rating} van 5 sterren">
+      <div class="product-card-body">
+        <div class="product-meta">
+          <p class="eyebrow uppercase-spaced">${t(product.category)}</p>
+          <span class="product-height">${product.height}</span>
+        </div>
+        <h3>${t(product.name)}</h3>
+        <div class="rating-row" aria-label="${product.rating} ${t("out of 5 stars")}">
           <span class="stars">${stars}</span>
           <span>${product.rating.toFixed(1)} (${product.reviewCount})</span>
         </div>
-        <div class="product-meta">
-          <p class="eyebrow">${product.category}</p>
-          <p class="product-height">${product.height}</p>
-        </div>
-        <h3>${product.name}</h3>
-        <p>${product.description}</p>
-        <div class="badge-row">${badges}</div>
+        <div class="product-card-badges">${badges}</div>
+        ${descriptionHtml}
         <div class="product-footer">
-          <div>
-            <strong>${new Intl.NumberFormat("nl-NL", { style: "currency", currency: "EUR", minimumFractionDigits: 0 }).format(product.price)}</strong>
-            <p class="old-price">voorheen ${new Intl.NumberFormat("nl-NL", { style: "currency", currency: "EUR", minimumFractionDigits: 0 }).format(product.compareAtPrice)}</p>
+          <div class="price-stack">
+            <span class="current-price">${formatPrice(product.price)}</span>
+            <span class="old-price">${formatPrice(product.compareAtPrice)}</span>
           </div>
-          <a class="text-link" href="/product-detail.html?slug=${product.slug}">Meer details</a>
+          <a class="btn btn-secondary btn-sm" href="/product-detail.html?slug=${product.slug}">${t("Details")}</a>
         </div>
       </div>
     </article>
@@ -91,9 +71,9 @@ export function createTestimonialCard(item) {
         <span class="stars">${stars}</span>
         <span>${item.rating}.0</span>
       </div>
-      <p class="testimonial-quote">“${item.quote}”</p>
-      <p class="testimonial-name">${item.name}</p>
-      <p class="testimonial-role">${item.role}</p>
+      <p class="testimonial-quote">“${t(item.quote)}”</p>
+      <p class="testimonial-name">${t(item.name)}</p>
+      <p class="testimonial-role">${t(item.role)}</p>
     </article>
   `;
 }
@@ -101,8 +81,8 @@ export function createTestimonialCard(item) {
 export function createFaqItem(item, index) {
   return `
     <details class="faq-item reveal"${index === 0 ? " open" : ""}>
-      <summary>${item.question}</summary>
-      <p>${item.answer}</p>
+      <summary>${t(item.question)}</summary>
+      <p>${t(item.answer)}</p>
     </details>
   `;
 }
@@ -110,18 +90,18 @@ export function createFaqItem(item, index) {
 export function createBlogCard(post) {
   return `
     <article class="card blog-card reveal">
-      <a class="blog-link" href="${post.href}" aria-label="${post.title}">
+      <a class="blog-link" href="${post.href}" aria-label="${t(post.title)}">
         <div class="card-media-wrap">
-          <img class="card-image" src="${post.image}" alt="${post.title}" loading="lazy" />
+          <img class="card-image" src="${post.image}" alt="${t(post.title)}" loading="lazy" />
         </div>
         <div class="card-body">
           <div class="blog-meta">
-            <span class="badge">${post.category}</span>
-            <span>${post.meta}</span>
+            <span class="badge">${t(post.category)}</span>
+            <span>${t(post.meta)}</span>
           </div>
-          <h3>${post.title}</h3>
-          <p>${post.excerpt}</p>
-          <span class="text-link">Lees meer</span>
+          <h3>${t(post.title)}</h3>
+          <p>${t(post.excerpt)}</p>
+          <span class="text-link">${t("Read more")}</span>
         </div>
       </a>
     </article>

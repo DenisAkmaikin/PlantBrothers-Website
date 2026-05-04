@@ -1,45 +1,39 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="nl">
   <head>
-    <meta charset="UTF-8" />
+    <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Winkelwagen | PlantBrothers</title>
-    <meta
-      name="description"
-      content="Bekijk de winkelwagen van PlantBrothers en ga verder met je aanvraag of bestelling van premium kunstplanten."
-    />
-    <meta property="og:title" content="Winkelwagen | PlantBrothers" />
-    <meta
-      property="og:description"
-      content="Overzicht van geselecteerde premium kunstplanten van PlantBrothers."
-    />
+    <title>Cart | 4EverPlants - Premium Artificial Plants</title>
+    <meta name="description" content="Overview of your selected premium artificial plants. Check your selection and proceed." />
+    <!-- Meta Tags -->
+    <meta property="og:title" content="Winkelwagen | 4EverPlants" />
     <meta property="og:type" content="website" />
     <meta property="og:image" content="/assets/images/product-strelitzia.svg" />
-    <link rel="stylesheet" href="/src/styles/main.css?v=20260317c" />
-    <script type="module" src="/src/scripts/main.js?v=20260317c"></script>
+    <link rel="stylesheet" href="/src/styles/main.css?v=20260503" />
+    <script type="module" src="/src/scripts/main.js?v=20260503"></script>
   </head>
   <body>
     <div data-header-root></div>
 
     <main>
-      <section class="page-hero">
-        <div class="container page-hero-inner reveal">
-          <p class="eyebrow">Winkelwagen</p>
-          <h1>Je selectie premium kunstplanten</h1>
-          <p class="lead">
-            Controleer je gekozen planten en ga verder naar contact of projectadvies. Deze flow is opgezet als basis voor
-            een latere volledige checkout.
-          </p>
+      <header class="page-header">
+        <div class="container reveal">
+          <p class="eyebrow uppercase-spaced">Shopping Cart</p>
+          <h1>Your Selection</h1>
+          <p class="lead lead--lg">Review your selected items and proceed with your project request or order. We will contact you after completion for styling details.</p>
         </div>
-      </section>
+      </header>
 
       <section class="section">
-        <div class="container" data-cart-root></div>
+        <div class="container" data-cart-root>
+           <!-- Cart is mounted here by JS -->
+        </div>
       </section>
 
       <div data-newsletter-root></div>
     </main>
 
     <div data-footer-root></div>
+    <div data-popup-root></div>
   </body>
 </html>
