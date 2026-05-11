@@ -3,85 +3,171 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Contact | 4EverPlants - Premium Artifical Plants</title>
-    <meta name="description" content="Neem contact op voor advies over premium artificial plants. Wij helpen u graag met styling en schaalverhoudingen." />
-    <!-- Meta Tags -->
+    <title>Contact | 4EverPlants - Premium Artificial Plants</title>
+    <meta name="description" content="Get in touch with 4EverPlants for expert styling advice, business inquiries, or product questions. We typically respond within 2 hours." />
     <meta property="og:title" content="Contact | 4EverPlants" />
     <meta property="og:type" content="website" />
-    <meta property="og:image" content="/assets/images/category-styling.svg" />
-    <link rel="stylesheet" href="/src/styles/main.css?v=20260503" />
-    <script type="module" src="/src/scripts/main.js?v=20260503"></script>
+    <meta property="og:image" content="/assets/images/product-images/artificial-olivetree.png" />
+    <link rel="stylesheet" href="/src/styles/main.css?v=20260511_v1" />
+    <script type="module" src="/src/scripts/main.js?v=20260511_v1"></script>
   </head>
   <body>
     <div data-header-root></div>
 
     <main>
-      <header class="page-header">
-        <div class="container reveal">
-          <p class="eyebrow uppercase-spaced">Contact & Advice</p>
-          <h1>How can we help you?</h1>
-          <p class="lead lead--lg" data-i18n="contact.lead">Do you have a question about a product, want styling advice, or need to submit a business request? We are happy to help you.</p>
+      <!-- ═══ 1. HERO: Cinematic Split ═══ -->
+      <section class="contact-hero">
+        <div class="contact-hero__image">
+          <img src="/assets/images/product-images/artificial-olivetree.png" alt="Premium olive tree in a sunlit interior" loading="eager" />
         </div>
-      </header>
+        <div class="contact-hero__content reveal">
+          <p class="eyebrow uppercase-spaced" data-i18n="Contact & Advice">Contact & Advice</p>
+          <h1 data-i18n="Let's bring your space to life.">Let's bring your space to life.</h1>
+          <p class="lead" data-i18n="contact.lead">Do you have a question about a product, want styling advice, or need to submit a business request? We are happy to help you.</p>
+          <div class="contact-hero__quick-actions">
+            <a href="mailto:info@4everplants.nl" class="btn btn-primary">
+              <span class="material-symbols-outlined" style="font-size: 20px;">mail</span>
+              info@4everplants.nl
+            </a>
+            <a href="tel:+31261234567" class="btn btn-secondary">
+              <span class="material-symbols-outlined" style="font-size: 20px;">call</span>
+              +31 (0)26 123 45 67
+            </a>
+          </div>
+        </div>
+      </section>
 
+      <!-- ═══ 2. TRUST STRIP: Response Promise ═══ -->
+      <section class="contact-trust-strip reveal">
+        <div class="container">
+          <div class="contact-trust-grid">
+            <div class="contact-trust-item">
+              <span class="material-symbols-outlined">schedule</span>
+              <div>
+                <strong data-i18n="Response within 2 hours">Response within 2 hours</strong>
+                <span data-i18n="On working days between 9:00–17:00">On working days between 9:00–17:00</span>
+              </div>
+            </div>
+            <div class="contact-trust-item">
+              <span class="material-symbols-outlined">verified</span>
+              <div>
+                <strong data-i18n="Personal advice">Personal advice</strong>
+                <span data-i18n="From our styling team">From our styling team</span>
+              </div>
+            </div>
+            <div class="contact-trust-item">
+              <span class="material-symbols-outlined">lock</span>
+              <div>
+                <strong data-i18n="Secure & private">Secure & private</strong>
+                <span data-i18n="Your data stays with us">Your data stays with us</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══ 3. CONTACT METHODS: Icon Cards ═══ -->
       <section class="section">
-        <div class="container split-grid" style="align-items: flex-start;">
-          <div class="content-surface reveal">
-            <p class="eyebrow">Send message</p>
-            <h2>Ask your question</h2>
-            <form class="contact-form" data-contact-form novalidate>
-              <div class="form-field">
-                <label for="name">Your name</label>
-                <input id="name" name="name" type="text" placeholder="Full name" required />
-              </div>
-              <div class="form-field">
-                <label for="email">Email address</label>
-                <input id="email" name="email" type="email" placeholder="email@example.com" required />
-              </div>
-              <div class="form-field">
-                <label for="interest">Question regarding</label>
-                <select id="interest" name="interest">
-                  <option>Private advice</option>
-                  <option>Business project</option>
-                  <option>Styling & Pots</option>
-                  <option>Other</option>
-                </select>
-              </div>
-              <div class="form-field">
-                <label for="message">Your message</label>
-                <textarea id="message" name="message" rows="5" placeholder="Your question or project description..." required></textarea>
-              </div>
-              <button type="submit" class="btn btn-primary" style="width: 100%;">Send message</button>
-              <p class="form-feedback" data-form-feedback aria-live="polite" style="margin-top: 1rem;"></p>
-            </form>
+        <div class="container">
+          <div class="section-header reveal" style="text-align: center; margin-bottom: 3rem;">
+            <p class="eyebrow uppercase-spaced" data-i18n="Reach us directly">Reach us directly</p>
+            <h2 data-i18n="Choose how you'd like to connect">Choose how you'd like to connect</h2>
           </div>
-          
-          <div class="reveal delay-1">
-             <div class="content-surface" style="margin-bottom: 2rem;">
-                <p class="eyebrow">Direct contact</p>
-                <h2>Company details</h2>
-                <div style="display: flex; flex-direction: column; gap: 1.5rem;">
-                   <div>
-                      <p style="font-weight: 700; margin-bottom: 0.25rem;">Email</p>
-                      <a href="mailto:info@4everplants.nl" class="text-link">info@4everplants.nl</a>
-                   </div>
-                   <div>
-                      <p style="font-weight: 700; margin-bottom: 0.25rem;">Phone</p>
-                      <a href="tel:+31261234567" class="text-link">+31 (0)26 123 45 67</a>
-                   </div>
-                   <div>
-                      <p style="font-weight: 700; margin-bottom: 0.25rem;">Showroom (by appointment)</p>
-                      <p>Eimerssingel-oost 25C<br>6834CX Arnhem</p>
-                   </div>
+          <div class="contact-methods-grid">
+            <a href="mailto:info@4everplants.nl" class="contact-method-card reveal">
+              <div class="contact-method-icon">
+                <span class="material-symbols-outlined">mail</span>
+              </div>
+              <h3>Email</h3>
+              <p>info@4everplants.nl</p>
+              <span class="contact-method-action" data-i18n="Send email →">Send email →</span>
+            </a>
+            <a href="tel:+31261234567" class="contact-method-card reveal delay-1">
+              <div class="contact-method-icon">
+                <span class="material-symbols-outlined">call</span>
+              </div>
+              <h3 data-i18n="Phone">Phone</h3>
+              <p>+31 (0)26 123 45 67</p>
+              <span class="contact-method-action" data-i18n="Call now →">Call now →</span>
+            </a>
+            <a href="https://wa.me/31612345678" target="_blank" rel="noopener" class="contact-method-card reveal delay-2">
+              <div class="contact-method-icon">
+                <span class="material-symbols-outlined">chat</span>
+              </div>
+              <h3>WhatsApp</h3>
+              <p data-i18n="Quick questions? Chat with us.">Quick questions? Chat with us.</p>
+              <span class="contact-method-action" data-i18n="Open chat →">Open chat →</span>
+            </a>
+            <div class="contact-method-card contact-method-card--showroom reveal delay-3">
+              <div class="contact-method-icon">
+                <span class="material-symbols-outlined">storefront</span>
+              </div>
+              <h3 data-i18n="Showroom">Showroom</h3>
+              <p>Eimerssingel-oost 25C<br>6834CX Arnhem</p>
+              <span class="contact-method-action" data-i18n="By appointment only">By appointment only</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══ 4. CONTACT FORM: Clean Floating Card ═══ -->
+      <section class="section contact-form-section">
+        <div class="container">
+          <div class="contact-form-layout">
+            <div class="contact-form-intro reveal">
+              <p class="eyebrow uppercase-spaced" data-i18n="Send a message">Send a message</p>
+              <h2 data-i18n="Tell us about your project">Tell us about your project</h2>
+              <p class="lead" data-i18n="contact.form_intro">Whether it's a single statement plant for your living room or a full greenery concept for your business — we love to help you find the perfect match.</p>
+              <div class="contact-form-image-accent">
+                <img src="/assets/images/product-images/bananenplant_180cm_lifestyle.jpg" alt="Banana plant in styled interior" loading="lazy" />
+              </div>
+            </div>
+            <div class="contact-form-card reveal delay-1">
+              <form class="contact-form" data-contact-form novalidate>
+                <div class="form-row">
+                  <div class="form-field">
+                    <label for="name" data-i18n="Your name">Your name</label>
+                    <input id="name" name="name" type="text" placeholder="John Doe" required />
+                  </div>
+                  <div class="form-field">
+                    <label for="email" data-i18n="Email address">Email address</label>
+                    <input id="email" name="email" type="email" placeholder="john@example.com" required />
+                  </div>
                 </div>
-             </div>
-             
-             <div class="content-surface" id="faq">
-                <p class="eyebrow">FAQ</p>
-                <h3>Frequently asked questions</h3>
-                <div class="faq-stack" data-faq-grid style="margin-top: 1.5rem;"></div>
-             </div>
+                <div class="form-field">
+                  <label for="interest" data-i18n="What can we help with?">What can we help with?</label>
+                  <select id="interest" name="interest">
+                    <option value="private" data-i18n="Private styling advice">Private styling advice</option>
+                    <option value="business" data-i18n="Business / project inquiry">Business / project inquiry</option>
+                    <option value="order" data-i18n="Question about my order">Question about my order</option>
+                    <option value="styling" data-i18n="Styling & pot advice">Styling & pot advice</option>
+                    <option value="other" data-i18n="Something else">Something else</option>
+                  </select>
+                </div>
+                <div class="form-field">
+                  <label for="message" data-i18n="Your message">Your message</label>
+                  <textarea id="message" name="message" rows="5" placeholder="" required data-i18n-placeholder="Describe what you're looking for, and we'll get back to you with tailored advice..."></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary contact-submit-btn">
+                  <span class="material-symbols-outlined" style="font-size: 20px;">send</span>
+                  <span data-i18n="Send message">Send message</span>
+                </button>
+                <p class="form-feedback" data-form-feedback aria-live="polite"></p>
+              </form>
+            </div>
           </div>
+        </div>
+      </section>
+
+      <!-- ═══ 5. FAQ: Full-width Accordion ═══ -->
+      <section class="section contact-faq-section" id="faq">
+        <div class="container">
+          <div class="contact-faq-header reveal" style="text-align: center; margin-bottom: 3rem;">
+            <p class="eyebrow uppercase-spaced" data-i18n="FAQ">FAQ</p>
+            <h2 data-i18n="Frequently asked questions">Frequently asked questions</h2>
+            <p class="lead" style="max-width: 60ch; margin: 0 auto;" data-i18n="contact.faq_intro">Can't find your answer? Send us a message and we'll get back to you within 2 hours.</p>
+          </div>
+          <div class="contact-faq-list" data-faq-grid></div>
         </div>
       </section>
 

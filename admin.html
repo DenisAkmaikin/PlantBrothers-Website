@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard | PlantBrothers</title>
+    <link rel="stylesheet" href="/src/styles/main.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <style>
+        :root {
+            --admin-primary: #1b5e20;
+            --admin-surface: #f8f9fa;
+        }
+        body {
+            background: var(--admin-surface);
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+        }
+        .admin-login {
+            max-width: 400px;
+            margin: 10vh auto;
+            padding: 3rem;
+            background: white;
+            border-radius: 2rem;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.05);
+            text-align: center;
+        }
+        .admin-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+        .stat-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 1.5rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.02);
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+        .stat-card h3 {
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--color-on-surface-variant);
+            margin-bottom: 0.5rem;
+        }
+        .stat-card .value {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--admin-primary);
+        }
+        .order-card {
+            background: white;
+            border-radius: 1.5rem;
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.02);
+            border: 1px solid rgba(0,0,0,0.05);
+            transition: transform 0.2s;
+        }
+        .order-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.04);
+        }
+        .order-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        .status-badge {
+            padding: 0.5rem 1rem;
+            border-radius: 2rem;
+            font-size: 0.75rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        .status-paid { background: #e8f5e9; color: #2e7d32; }
+        .status-shipped { background: #e3f2fd; color: #1565c0; }
+        .status-pending { background: #fff3e0; color: #ef6c00; }
+        .status-cancelled { background: #ffebee; color: #c62828; }
+
+        .details-grid {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr;
+            gap: 3rem;
+        }
+        .item-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.75rem 0;
+            border-bottom: 1px dashed #eee;
+        }
+        .update-box {
+            background: #fcfcfc;
+            padding: 1.5rem;
+            border-radius: 1rem;
+            border: 1px solid #eee;
+        }
+        select {
+            width: 100%;
+            padding: 0.75rem;
+            border-radius: 0.5rem;
+            border: 1px solid #ddd;
+            margin-top: 0.5rem;
+            font-weight: 600;
+        }
+        .btn-logout {
+            background: none;
+            border: none;
+            color: #ff5252;
+            cursor: pointer;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Login Section -->
+    <div id="login-section" class="admin-login">
+        <span class="material-symbols-outlined" style="font-size: 4rem; color: var(--admin-primary); margin-bottom: 1.5rem;">lock</span>
+        <h1 style="font-size: 2rem; font-weight: 800; margin-bottom: 1rem;">Admin Portal</h1>
+        <p style="color: #666; margin-bottom: 2rem;">Please enter the secure admin password to access the order dashboard.</p>
+        <input type="password" id="admin-pass" placeholder="Admin Password" style="width: 100%; padding: 1.25rem; margin-bottom: 1rem; border-radius: 1rem; border: 2px solid #eee; font-size: 1rem;">
+        <button onclick="login()" class="btn-buy-premium" style="width: 100%; border-radius: 1rem;">Access Dashboard</button>
+    </div>
+
+    <!-- Dashboard Section -->
+    <div id="dashboard-section" style="display: none;">
+        <header style="background: white; padding: 1.5rem 0; border-bottom: 1px solid #eee; margin-bottom: 3rem;">
+            <div class="admin-container" style="display: flex; justify-content: space-between; align-items: center; padding-top: 0; padding-bottom: 0;">
+                <div style="display: flex; align-items: center; gap: 1rem;">
+                    <div style="width: 40px; height: 40px; background: var(--admin-primary); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: white;">
+                        <span class="material-symbols-outlined">potted_plant</span>
+                    </div>
+                    <strong style="font-size: 1.25rem;">PlantBrothers Admin</strong>
+                </div>
+                <button onclick="logout()" class="btn-logout">
+                    <span class="material-symbols-outlined">logout</span> Logout
+                </button>
+            </div>
+        </header>
+
+        <div class="admin-container">
+            <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 2rem;">
+                <div style="flex: 1; max-width: 400px;">
+                    <label style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: #999; display: block; margin-bottom: 0.5rem;">Quick Search</label>
+                    <input type="text" id="order-search" placeholder="Search by name, email or ID..." oninput="filterOrders()" style="width: 100%; padding: 1rem; border-radius: 1rem; border: 1px solid #ddd; font-size: 0.9rem;">
+                </div>
+                <a href="/index.html" style="display: flex; align-items: center; gap: 0.5rem; color: var(--admin-primary); font-weight: 700; text-decoration: none; font-size: 0.9rem;">
+                    View Website <span class="material-symbols-outlined">open_in_new</span>
+                </a>
+            </div>
+
+            <div class="stats-grid" id="stats-summary">
+                <div class="stat-card">
+                    <h3>Total Orders</h3>
+                    <div class="value" id="stat-count">-</div>
+                </div>
+                <div class="stat-card">
+                    <h3>Gross Revenue</h3>
+                    <div class="value" id="stat-revenue">-</div>
+                </div>
+                <div class="stat-card">
+                    <h3>Active Items</h3>
+                    <div class="value" id="stat-items">-</div>
+                </div>
+            </div>
+
+            <div id="orders-list">
+                <p>Syncing with Supabase...</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const API_URL = "https://xolbpncjwbplwqtlkygt.supabase.co/functions/v1/get-orders";
+        const UPDATE_URL = "https://xolbpncjwbplwqtlkygt.supabase.co/functions/v1/update-order-status";
+
+        function formatPrice(cents) {
+            return new Intl.NumberFormat('nl-NL', { style: 'currency', currency: 'EUR' }).format(cents / 100);
+        }
+
+        async function login() {
+            const pass = document.getElementById('admin-pass').value;
+            localStorage.setItem('pb_admin_pass', pass);
+            await loadOrders();
+        }
+
+        function logout() {
+            localStorage.removeItem('pb_admin_pass');
+            location.reload();
+        }
+
+        async function loadOrders() {
+            const pass = localStorage.getItem('pb_admin_pass');
+            if (!pass) return;
+
+            try {
+                const res = await fetch(API_URL, {
+                    headers: { 'x-admin-pass': pass }
+                });
+                
+                const data = await res.json();
+                
+                if (data.error) {
+                    alert("Authentication Failed: " + data.error);
+                    logout();
+                    return;
+                }
+
+                document.getElementById('login-section').style.display = 'none';
+                document.getElementById('dashboard-section').style.display = 'block';
+
+                allOrders = data.orders;
+                updateStats(data.orders);
+                renderOrders(data.orders);
+
+            } catch (err) {
+                console.error(err);
+                alert("Critical Connection Error.");
+            }
+        }
+
+        let allOrders = [];
+
+        function updateStats(orders) {
+            const totalRevenue = orders.reduce((sum, o) => sum + o.amount, 0);
+            const totalItems = orders.reduce((sum, o) => sum + o.order_items.length, 0);
+            
+            document.getElementById('stat-count').textContent = orders.length;
+            document.getElementById('stat-revenue').textContent = formatPrice(totalRevenue);
+            document.getElementById('stat-items').textContent = totalItems;
+        }
+
+        function filterOrders() {
+            const query = document.getElementById('order-search').value.toLowerCase();
+            const filtered = allOrders.filter(o => 
+                o.shipping_name?.toLowerCase().includes(query) || 
+                o.email?.toLowerCase().includes(query) || 
+                o.id.toLowerCase().includes(query)
+            );
+            renderOrders(filtered);
+        }
+
+        function renderOrders(orders) {
+            const list = document.getElementById('orders-list');
+            list.innerHTML = orders.length ? '' : '<div class="stat-card">No orders recorded yet.</div>';
+
+            orders.forEach(order => {
+                const date = new Date(order.created_at).toLocaleDateString('nl-NL', { day: 'numeric', month: 'long', year: 'numeric' });
+                const card = document.createElement('div');
+                card.className = 'order-card';
+                card.innerHTML = `
+                    <div class="order-header">
+                        <div>
+                            <span style="font-size: 0.8rem; text-transform: uppercase; color: #999; font-weight: 700; letter-spacing: 0.1em;">Order ID</span>
+                            <h2 style="font-size: 1.25rem; font-weight: 800;">#${order.id.slice(0,8)}</h2>
+                            <p style="font-size: 0.875rem; color: #666; margin-top: 0.25rem;">${date}</p>
+                        </div>
+                        <div style="text-align: right;">
+                            <div class="status-badge status-${order.status}">${order.status}</div>
+                            <p style="font-size: 1.5rem; font-weight: 800; color: var(--admin-primary); margin-top: 0.5rem;">${formatPrice(order.amount)}</p>
+                        </div>
+                    </div>
+                    <div class="details-grid">
+                        <div>
+                            <h3 style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: #999; margin-bottom: 1rem;">Fulfillment Details</h3>
+                            <p><strong>${order.shipping_name}</strong></p>
+                            <p style="color: #666; line-height: 1.6;">
+                                ${order.shipping_street}<br>
+                                ${order.shipping_zip} ${order.shipping_city}<br>
+                                ${order.shipping_country}
+                            </p>
+                            <p style="margin-top: 1rem; color: var(--admin-primary); font-weight: 600;">${order.email}</p>
+                            
+                            <div class="update-box" style="margin-top: 2rem;">
+                                <label style="font-size: 0.7rem; font-weight: 800; text-transform: uppercase; color: #777;">Update Processing Status</label>
+                                <select onchange="handleStatusChange('${order.id}', this.value)">
+                                    <option value="paid" ${order.status === 'paid' ? 'selected' : ''}>Paid (Pending Shipment)</option>
+                                    <option value="shipped" ${order.status === 'shipped' ? 'selected' : ''}>Shipped & Completed</option>
+                                    <option value="cancelled" ${order.status === 'cancelled' ? 'selected' : ''}>Cancelled / Refunded</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div>
+                            <h3 style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: #999; margin-bottom: 1rem;">Packing List</h3>
+                            <div style="background: #fafafa; padding: 1.5rem; border-radius: 1rem;">
+                                ${order.order_items.map(item => `
+                                    <div class="item-row">
+                                        <span>${item.quantity}x ${item.product_name}</span>
+                                        <strong>${formatPrice(item.unit_price)}</strong>
+                                    </div>
+                                `).join('')}
+                                <div class="item-row" style="border: none; margin-top: 1rem; padding-top: 1rem; border-top: 2px solid #eee;">
+                                    <span>Shipping</span>
+                                    <strong>${formatPrice(order.shipping_fee)}</strong>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                list.appendChild(card);
+            });
+        }
+
+        async function handleStatusChange(orderId, newStatus) {
+            if (!confirm(`Are you sure you want to change the status of order #${orderId.slice(0,8)} to "${newStatus.toUpperCase()}"?`)) {
+                loadOrders(); // Reset UI
+                return;
+            }
+
+            const pass = localStorage.getItem('pb_admin_pass');
+            try {
+                const res = await fetch(UPDATE_URL, {
+                    method: 'POST',
+                    headers: { 
+                        'Content-Type': 'application/json',
+                        'x-admin-pass': pass 
+                    },
+                    body: JSON.stringify({ orderId, status: newStatus })
+                });
+                
+                const data = await res.json();
+                if (data.error) throw new Error(data.error);
+                
+                loadOrders(); // Refresh all
+            } catch (err) {
+                alert("Error updating status: " + err.message);
+            }
+        }
+
+        if (localStorage.getItem('pb_admin_pass')) {
+            loadOrders();
+        }
+    </script>
+</body>
+</html>

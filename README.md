@@ -65,3 +65,8 @@ http://localhost:4173
 - `cart.html` is een basis voor een latere checkout-flow.
 - Productdata staat centraal in `src/data/site.js`, zodat een latere winkelmand- of CMS-koppeling logisch blijft.
 - De collectiepagina heeft al categorie-filters en productcards die eenvoudig uit te breiden zijn.
+
+## Ontwikkeling & Verificatie
+
+- **Verificatie**: Alle visuele en functionele verificatie wordt door de GEBRUIKER uitgevoerd. AI-assistenten dienen geen browser-tools of screenshots te gebruiken voor validatie.
+- **Richtlijnen**: Zie [rules.md](file:///home/akmaikin/Desktop/Amaterasu%20Projects/Plantbrothers/PlantBrothers-Website/rules.md) voor de volledige ontwikkelrichtlijnen en het AI-protocol.

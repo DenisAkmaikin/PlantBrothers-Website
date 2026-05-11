@@ -9,24 +9,51 @@
     <meta property="og:title" content="Winkelwagen | 4EverPlants" />
     <meta property="og:type" content="website" />
     <meta property="og:image" content="/assets/images/product-strelitzia.svg" />
-    <link rel="stylesheet" href="/src/styles/main.css?v=20260503" />
-    <script type="module" src="/src/scripts/main.js?v=20260503"></script>
+    <link rel="stylesheet" href="/src/styles/main.css?v=20260511_v1" />
+    <script src="https://js.stripe.com/v3/"></script>
+    <script type="module" src="/src/scripts/main.js?v=20260511_v1"></script>
   </head>
   <body>
     <div data-header-root></div>
 
     <main>
-      <header class="page-header">
-        <div class="container reveal">
-          <p class="eyebrow uppercase-spaced">Shopping Cart</p>
-          <h1>Your Selection</h1>
-          <p class="lead lead--lg">Review your selected items and proceed with your project request or order. We will contact you after completion for styling details.</p>
+      <section class="section-sm cart-header-section">
+        <div class="container" style="text-align: left; padding-top: 2rem;">
+          <h1 class="cart-page-title" data-i18n="Shopping Cart">Shopping Cart</h1>
         </div>
-      </header>
+      </section>
+
+      <section class="section-sm">
+        <div class="container">
+          <div data-cart-root></div>
+        </div>
+      </section>
 
       <section class="section">
-        <div class="container" data-cart-root>
-           <!-- Cart is mounted here by JS -->
+        <div class="container" id="checkout-container" style="display: none; padding-top: 2rem; max-width: 800px;">
+            <button type="button" onclick="location.reload()" style="background: none; border: none; color: var(--color-primary); cursor: pointer; display: flex; align-items: center; gap: 0.5rem; font-weight: 700; margin-bottom: 2rem;">
+               <span class="material-symbols-outlined">arrow_back</span> <span data-i18n="Back to Cart">Back to Cart</span>
+            </button>
+
+            <div class="checkout-header" style="text-align: center; margin-bottom: 3rem;">
+              <span class="material-symbols-outlined" style="font-size: 48px; color: var(--color-primary); margin-bottom: 1rem;">lock</span>
+              <h2 style="font-size: 2rem; margin-bottom: 0.5rem;" data-i18n="Secure Checkout">Secure Checkout</h2>
+              <p style="color: var(--color-on-surface-variant);" data-i18n="Complete your premium order safely and securely.">Complete your premium order safely and securely.</p>
+            </div>
+           
+           <!-- Stripe Embedded Checkout mounts here -->
+           <div id="stripe-checkout-mount"></div>
+
+           <div class="checkout-footer" style="margin-top: 4rem; text-align: center; border-top: 1px solid var(--color-outline-variant); padding-top: 2rem;">
+             <div style="display: flex; justify-content: center; gap: 2rem; opacity: 0.6; grayscale: 1;">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Visa_Inc._logo.svg" alt="Visa" style="height: 20px;">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg" alt="Mastercard" style="height: 30px;">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/b/b9/IDeal_logo.svg" alt="iDEAL" style="height: 30px;">
+             </div>
+             <p style="font-size: 0.8rem; color: var(--color-on-surface-variant); margin-top: 1.5rem;">
+               Encrypted with SSL for your security. 4EverPlants does not store your payment data.
+             </p>
+           </div>
         </div>
       </section>
 

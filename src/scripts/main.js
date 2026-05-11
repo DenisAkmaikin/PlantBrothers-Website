@@ -13,7 +13,7 @@ import {
   trustLogos,
   uspItems,
   why4EverPlants,
-} from "../data/site.js?v=20260503";
+} from "../data/site.js?v=20260511_v1";
 import {
   clearCart,
   formatPrice,
@@ -21,17 +21,17 @@ import {
   getCartCount,
   updateQuantity,
   addToCart,
-} from "./cart-store.js?v=20260503";
+} from "./cart-store.js?v=20260511_v1";
 import {
   createBlogCard,
   createCategoryCard,
   createFaqItem,
   createProductCard,
   createTestimonialCard,
-} from "../components/cards.js?v=20260503";
-import { createProductImageComponent } from "../components/product-image.js?v=20260503";
-import { renderFooter, renderHeader, renderNewsletter, renderFloaters, renderUspStrip, renderFeaturesSection, renderProductUSPs } from "../components/layout.js?v=20260503";
-import { applyTranslations, getCurrentLanguage, setCurrentLanguage, t } from "../data/translations.js?v=20260503";
+} from "../components/cards.js?v=20260511_v1";
+import { createProductImageComponent } from "../components/product-image.js?v=20260511_v1";
+import { renderFooter, renderHeader, renderNewsletter, renderFloaters, renderUspStrip, renderFeaturesSection, renderProductUSPs } from "../components/layout.js?v=20260511_v1";
+import { applyTranslations, getCurrentLanguage, setCurrentLanguage, t } from "../data/translations.js?v=20260511_v1";
 
 function mountLayout() {
   const headerRoot = document.querySelector("[data-header-root]");
@@ -106,6 +106,53 @@ function initMenu() {
       submenu.classList.toggle("is-open", !expanded);
     });
   }
+}
+
+function initCartToast() {
+  const overlay = document.querySelector("[data-cart-toast]");
+  const closeBtn = document.querySelector("[data-cart-toast-close]");
+  if (!overlay || !closeBtn) return;
+
+  const closeToast = () => {
+    overlay.setAttribute("aria-hidden", "true");
+  };
+
+  closeBtn.addEventListener("click", closeToast);
+  overlay.addEventListener("click", (e) => {
+    if (e.target === overlay) closeToast();
+  });
+}
+
+let toastTimeout = null;
+
+function showCartToast(product, quantity) {
+  const overlay = document.querySelector("[data-cart-toast]");
+  const content = document.querySelector("[data-cart-toast-content]");
+  const countToast = document.querySelector("[data-cart-count-toast]");
+  if (!overlay || !content) return;
+
+  if (toastTimeout) clearTimeout(toastTimeout);
+
+  content.innerHTML = `
+    <img src="${product.image}" alt="${t(product.name)}" class="cart-toast-image" />
+    <div class="cart-toast-info">
+      <h3>${t(product.name)}</h3>
+      <p>${t("4EverPlants collectie")}</p>
+      <p>${t("Aantal")}: ${quantity}</p>
+      <div class="cart-toast-price">${formatPrice(product.price * quantity)}</div>
+    </div>
+  `;
+
+  if (countToast) countToast.textContent = String(getCartCount());
+  
+  // Toggle visibility to ensure animation re-triggers if already visible
+  overlay.setAttribute("aria-hidden", "true");
+  void overlay.offsetWidth; // Force reflow
+  overlay.setAttribute("aria-hidden", "false");
+
+  toastTimeout = setTimeout(() => {
+    overlay.setAttribute("aria-hidden", "true");
+  }, 6000);
 }
 
 function initShopMenu() {
@@ -384,7 +431,7 @@ function populateLists() {
             ${product.compareAtPrice ? `<p class="old-price">${t("Normally")} ${formatPrice(product.compareAtPrice)}</p>` : ""}
           </div>
 
-          <form class="purchase-box" data-add-to-cart-form data-product-slug="${product.slug}">
+          <form class="purchase-box" data-add-to-cart-form data-product-slug="${product.slug}" data-unit-price="${product.price}">
             <div class="field">
               <label style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.75rem; display: block; font-weight: 800; color: var(--color-on-surface-variant);">${t("Select Quantity")}</label>
               <div class="quantity-selector" data-qty-container style="background: var(--color-surface-container-low); padding: 0.5rem; border-radius: var(--radius-lg);">
@@ -655,22 +702,26 @@ function initNewsletterForm() {
     btn.disabled = true;
 
     try {
-      // TODO: Replace with actual Formspree/Mailchimp endpoint
-      const response = await fetch("https://formspree.io/f/YOUR_NEWSLETTER_FORM_ID", {
+      const response = await fetch("https://formspree.io/f/mzdokwkn", {
         method: "POST",
         headers: {
           'Content-Type': 'application/json',
           'Accept': 'application/json'
         },
-        body: JSON.stringify({ email: email })
+        body: JSON.stringify({ 
+          email: email, 
+          form: 'Footer Newsletter',
+          page: window.location.pathname 
+        })
       });
+      
+      if (!response.ok) throw new Error("Submission failed");
       
       form.reset();
       setFeedback(form, t("Thank you. You will receive inspiration and promotions from 4EverPlants shortly."), true);
     } catch (error) {
-      console.warn("Newsletter submission mocked since endpoint is not set up.");
-      form.reset();
-      setFeedback(form, t("Thank you. You will receive inspiration and promotions from 4EverPlants shortly."), true);
+      console.error("Newsletter error:", error);
+      setFeedback(form, t("Sorry, something went wrong. Please try again later."), false);
     } finally {
       btn.textContent = originalText;
       btn.disabled = false;
@@ -719,7 +770,7 @@ function initFloaters() {
     }
   });
 
-  form.addEventListener("submit", (e) => {
+  form.addEventListener("submit", async (e) => {
     e.preventDefault();
     const email = form.elements.email.value.trim();
     if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
@@ -731,13 +782,31 @@ function initFloaters() {
     btn.textContent = "Sending...";
     btn.disabled = true;
 
-    // Simulate API call for discount
-    setTimeout(() => {
+    try {
+      const response = await fetch("https://formspree.io/f/mzdokwkn", {
+        method: "POST",
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({ 
+          email: email, 
+          form: 'Discount Popup (WELCOME10)',
+          page: window.location.pathname 
+        })
+      });
+      
+      if (!response.ok) throw new Error("Submission failed");
+      
       setFeedback(form, t("Thank you! Use code WELCOME10 at checkout."), true);
       setTimeout(closePopup, 3500);
+    } catch (error) {
+      console.error("Popup submission error:", error);
+      setFeedback(form, t("Sorry, something went wrong. Please try again later."), false);
+    } finally {
       btn.textContent = originalText;
       btn.disabled = false;
-    }, 800);
+    }
   });
 }
 
@@ -769,7 +838,7 @@ function initContactForm() {
 
     try {
       // TODO: Replace with actual Formspree endpoint
-      const response = await fetch("https://formspree.io/f/YOUR_CONTACT_FORM_ID", {
+      const response = await fetch("https://formspree.io/f/mzdokwkn", {
         method: "POST",
         body: formData,
         headers: { 'Accept': 'application/json' }
@@ -816,34 +885,47 @@ function initCookieBanner() {
 }
 
 function initCollectionFilters() {
-  const chips = Array.from(document.querySelectorAll("[data-filter]"));
-  const products = Array.from(document.querySelectorAll("[data-product-category]"));
+  const filterRow = document.querySelector(".filter-row");
   const emptyState = document.querySelector("[data-empty-state]");
-  if (!chips.length || !products.length) return;
+  if (!filterRow) return;
 
   const applyFilter = (filter) => {
-    chips.forEach((chip) => chip.classList.toggle("is-active", chip.dataset.filter === filter));
+    const chips = filterRow.querySelectorAll("[data-filter]");
+    const products = document.querySelectorAll("[data-product-category]");
+    
+    // Update active button UI
+    chips.forEach((chip) => chip.classList.toggle("active", chip.dataset.filter === filter));
+    
+    // Filter products
     products.forEach((product) => {
       const visible = filter === "all" || product.dataset.productCategory === filter;
       product.hidden = !visible;
+      product.style.display = visible ? "" : "none";
+      // Also handle reveal animation class to ensure filtered items are visible
+      if (visible) product.classList.add("is-visible");
     });
 
     if (emptyState) {
-      emptyState.hidden = products.some((product) => !product.hidden);
+      const hasVisible = Array.from(products).some((p) => !p.hidden);
+      emptyState.hidden = hasVisible;
     }
   };
 
-  chips.forEach((chip) => {
-    chip.addEventListener("click", (event) => {
-      event.preventDefault();
-      const filter = chip.dataset.filter || "all";
-      history.replaceState(null, "", filter === "all" ? "#producten" : `#${filter}`);
-      applyFilter(filter);
-    });
+  // Event delegation for chips
+  filterRow.addEventListener("click", (event) => {
+    const chip = event.target.closest("[data-filter]");
+    if (!chip) return;
+    
+    event.preventDefault();
+    const filter = chip.dataset.filter || "all";
+    history.replaceState(null, "", filter === "all" ? "#producten" : `#${filter}`);
+    applyFilter(filter);
   });
 
+  // Initial filter based on URL hash
   const initialHash = window.location.hash.replace("#", "");
-  const initialFilter = chips.some((chip) => chip.dataset.filter === initialHash) ? initialHash : "all";
+  const chips = filterRow.querySelectorAll("[data-filter]");
+  const initialFilter = Array.from(chips).some((chip) => chip.dataset.filter === initialHash) ? initialHash : "all";
   applyFilter(initialFilter);
 }
 
@@ -861,14 +943,35 @@ function initQuantitySelectors() {
     minus.parentNode.replaceChild(newMinus, minus);
     plus.parentNode.replaceChild(newPlus, plus);
 
+    const updatePrice = () => {
+      const form = container.closest("[data-add-to-cart-form]");
+      if (!form) return;
+      const unitPrice = parseFloat(form.dataset.unitPrice);
+      const qty = parseInt(input.value) || 1;
+      const buyBtn = form.querySelector(".btn-buy-premium");
+      if (buyBtn && unitPrice) {
+        buyBtn.innerHTML = `${t("Add to Cart")} — ${formatPrice(unitPrice * qty)}`;
+      }
+      const mobilePrice = document.querySelector(".mobile-buy-bar .price");
+      if (mobilePrice && unitPrice) {
+        mobilePrice.textContent = formatPrice(unitPrice * qty);
+      }
+    };
+
     newMinus.addEventListener("click", () => {
       const val = parseInt(input.value) || 1;
-      if (val > 1) input.value = val - 1;
+      if (val > 1) {
+        input.value = val - 1;
+        updatePrice();
+      }
     });
 
     newPlus.addEventListener("click", () => {
       const val = parseInt(input.value) || 1;
-      if (val < 99) input.value = val + 1;
+      if (val < 99) {
+        input.value = val + 1;
+        updatePrice();
+      }
     });
   });
 }
@@ -908,22 +1011,23 @@ function syncCartCount() {
 }
 
 function initAddToCartForms() {
-  document.querySelectorAll("[data-add-to-cart-form]").forEach((form) => {
-    form.addEventListener("submit", (event) => {
-      event.preventDefault();
-      const slug = form.dataset.productSlug;
-      const quantity = Number(form.elements.quantity.value || 1);
-      const product = featuredProducts.find((item) => item.slug === slug);
-      if (!product) return;
+  document.addEventListener("submit", (event) => {
+    const form = event.target.closest("[data-add-to-cart-form]");
+    if (!form) return;
 
-      addToCart(product, quantity);
-      syncCartCount();
-      setFeedback(form, t("Added to your cart."), true);
-    });
+    event.preventDefault();
+    const slug = form.dataset.productSlug;
+    const quantity = Number(form.elements.quantity?.value || 1);
+    const product = featuredProducts.find((item) => item.slug === slug);
+    if (!product) return;
+
+    addToCart(product, quantity);
+    syncCartCount();
+    showCartToast(product, quantity);
   });
 }
 
-function renderCartPage() {
+function renderCartPage(isUpdate = false) {
   const root = document.querySelector("[data-cart-root]");
   if (!root) return;
 
@@ -932,102 +1036,194 @@ function renderCartPage() {
 
   if (!cart.length) {
     root.innerHTML = `
-      <div class="cart-empty content-surface reveal">
+      <div class="cart-empty content-surface ${isUpdate ? "" : "reveal"}">
         <p class="eyebrow">${t("Winkelwagen")}</p>
         <h2>${t("Je winkelwagen is nog leeg")}</h2>
         <p>${t("Bekijk de collectie en voeg je favoriete artificial plants toe om verder te gaan.")}</p>
         <a class="btn btn-primary" href="/collectie.html">${t("Naar collectie")}</a>
       </div>
     `;
-    applyTranslations(root, getCurrentLanguage());
     return;
   }
 
+  // Use t() synchronously in the template instead of data-i18n where possible to avoid flickering
   root.innerHTML = `
     <div class="cart-layout">
       <section class="cart-items">
         ${cart
           .map(
             (item) => `
-              <article class="cart-item reveal">
-                <img src="${item.image}" alt="${t(item.name)}" />
-                <div>
-                  <p class="eyebrow uppercase-spaced">${t("4EverPlants collectie")}</p>
-                  <h2>${t(item.name)}</h2>
-                  <p>${formatPrice(item.price)} ${t("per stuk")}</p>
+              <article class="cart-item ${isUpdate ? "" : "reveal"}">
+                <div class="cart-item-image-wrap">
+                  <img src="${item.image}" alt="${t(item.name)}" />
                 </div>
-                <div class="cart-item-controls">
-                  <label for="qty-${item.slug}" class="sr-only">${t("Aantal")} ${t(item.name)}</label>
-                  <select id="qty-${item.slug}" data-cart-quantity data-slug="${item.slug}">
-                    ${[0, 1, 2, 3, 4].map((value) => `<option value="${value}"${item.quantity === value ? " selected" : ""}>${value}</option>`).join("")}
-                  </select>
-                  <strong>${formatPrice(item.price * item.quantity)}</strong>
+                <div class="cart-item-details">
+                  <div class="cart-item-header">
+                    <div class="cart-item-name-group">
+                      <p class="eyebrow uppercase-spaced" style="font-size: 0.65rem; margin-bottom: 0.25rem;">4EverPlants collectie</p>
+                      <h2 class="cart-item-title">${t(item.name)}</h2>
+                    </div>
+                    <div class="cart-item-price-main">
+                      ${formatPrice(item.price * item.quantity)}
+                    </div>
+                  </div>
+                  
+                  <div class="cart-item-meta">
+                    <p>${formatPrice(item.price)} ${t("per stuk")}</p>
+                  </div>
+
+                  <div class="cart-item-actions">
+                    <div class="qty-toggle">
+                      <button type="button" class="qty-btn" data-qty-change="-1" data-slug="${item.slug}">−</button>
+                      <span class="qty-val">${item.quantity}</span>
+                      <button type="button" class="qty-btn" data-qty-change="1" data-slug="${item.slug}">+</button>
+                    </div>
+                    <button type="button" class="btn-trash-nike" data-qty-remove data-slug="${item.slug}" aria-label="${t("Verwijderen")}">
+                      <span class="material-symbols-outlined">delete</span>
+                    </button>
+                  </div>
                 </div>
               </article>
             `,
           )
           .join("")}
       </section>
-      <aside class="cart-summary content-surface reveal">
-        <p class="eyebrow uppercase-spaced" data-i18n="Summary">Summary</p>
-        <h2 data-i18n="Order Overview">Order Overview</h2>
+      
+      <aside class="cart-summary content-surface ${isUpdate ? "" : "reveal"}">
+        <p class="eyebrow uppercase-spaced">${t("Summary")}</p>
+        <h2 style="margin-bottom: 1.5rem;">${t("Order Overview")}</h2>
         
         ${
           subtotal < shippingPolicy.freeThreshold
             ? `
-            <div class="shipping-progress" style="margin-bottom: 1.5rem; padding: 1rem; background: var(--color-secondary-container); color: var(--color-on-secondary-container); border-radius: var(--radius-md); font-size: 0.875rem;">
-              <p style="margin: 0;">${t("Only <strong>{{amount}}</strong> remaining until free shipping!", { amount: formatPrice(shippingPolicy.freeThreshold - subtotal) })}</p>
-              <div style="height: 4px; background: rgba(0,0,0,0.1); border-radius: 2px; margin-top: 0.5rem; overflow: hidden;">
-                <div style="height: 100%; width: ${(subtotal / shippingPolicy.freeThreshold) * 100}%; background: var(--color-on-secondary-container);"></div>
-              </div>
+            <div class="shipping-progress" style="margin-bottom: 1.5rem; padding: 1rem; background: var(--color-surface-container); border-radius: var(--radius-md); font-size: 0.8125rem;">
+              <p style="margin: 0; color: var(--color-on-surface-variant);">${t("Winkel nog voor")} <strong>${formatPrice(shippingPolicy.freeThreshold - subtotal)}</strong> ${t("om in aanmerking te komen voor gratis verzending!")}</p>
             </div>
             `
             : `
-            <div class="shipping-progress" style="margin-bottom: 1.5rem; padding: 1rem; background: #e8f5e9; color: #2e7d32; border-radius: var(--radius-md); font-size: 0.875rem; display: flex; align-items: center; gap: 0.5rem;">
-              <span class="material-symbols-outlined">check_circle</span>
-              <p style="margin: 0;">${t("Your order qualifies for <strong>Free Shipping</strong>!")}</p>
+            <div class="shipping-progress" style="margin-bottom: 1.5rem; padding: 0.75rem 1rem; background: #edf7ed; color: #1b4332; border-radius: var(--radius-md); font-size: 0.8125rem; display: flex; align-items: center; gap: 0.5rem;">
+              <span class="material-symbols-outlined" style="font-size: 18px;">check_circle</span>
+              <p style="margin: 0; font-weight: 600;">${t("Gratis verzending toegepast")}</p>
             </div>
             `
         }
 
-        <div class="spec-row">
-          <span data-i18n="Subtotal">Subtotal</span>
-          <strong>${formatPrice(subtotal)}</strong>
+        <div class="spec-row" style="margin-bottom: 0.75rem;">
+          <span>${t("Subtotal")}</span>
+          <span>${formatPrice(subtotal)}</span>
         </div>
-        <div class="spec-row" style="margin: 1rem 0; padding: 1rem 0; border-top: 1px solid var(--color-outline-variant); border-bottom: 1px solid var(--color-outline-variant);">
-          <span data-i18n="Shipping">Shipping</span>
-          <strong>${subtotal >= shippingPolicy.freeThreshold ? t("Free") : formatPrice(shippingPolicy.nl.cost)}</strong>
+        <div class="spec-row" style="margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 1px solid var(--color-outline-variant);">
+          <span>${t("Shipping")}</span>
+          <span>${subtotal >= shippingPolicy.freeThreshold ? t("Free") : formatPrice(shippingPolicy.nl.cost)}</span>
         </div>
         <div class="spec-row" style="margin-bottom: 2rem;">
-          <span style="font-weight: 600;" data-i18n="Total">Total</span>
+          <span style="font-weight: 700; font-size: 1.125rem;">${t("Total")}</span>
           <strong style="font-size: 1.25rem;">${formatPrice(subtotal + (subtotal >= shippingPolicy.freeThreshold ? 0 : shippingPolicy.nl.cost))}</strong>
         </div>
-        <div style="display: flex; flex-direction: column; gap: 1rem;">
-          <a class="btn btn-primary" href="/contact.html" data-i18n="Proceed to request">Proceed to request</a>
-          <button class="btn btn-secondary" type="button" data-clear-cart data-i18n="Empty cart">Empty cart</button>
-        </div>
+        
+        <button class="btn btn-primary btn-full" type="button" data-checkout-btn>${t("cart.checkout")}</button>
       </aside>
     </div>
   `;
 
-  root.querySelectorAll("[data-cart-quantity]").forEach((select) => {
-    select.addEventListener("change", () => {
-      updateQuantity(select.dataset.slug, Number(select.value));
-      syncCartCount();
-      renderCartPage();
+  // Quantity Change Logic
+  root.querySelectorAll("[data-qty-change]").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const slug = btn.dataset.slug;
+      const change = parseInt(btn.dataset.qtyChange);
+      const item = cart.find(i => i.slug === slug);
+      if (item) {
+        updateQuantity(slug, Math.max(0, item.quantity + change));
+        syncCartCount();
+        renderCartPage(true); // Fast update
+      }
     });
   });
 
-  const clearButton = root.querySelector("[data-clear-cart]");
-  if (clearButton) {
-    clearButton.addEventListener("click", () => {
-      clearCart();
+  // Remove Logic
+  root.querySelectorAll("[data-qty-remove]").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      updateQuantity(btn.dataset.slug, 0);
       syncCartCount();
-      renderCartPage();
+      renderCartPage(true); // Fast update
+    });
+  });
+
+  const checkoutBtn = root.querySelector("[data-checkout-btn]");
+  if (checkoutBtn) {
+    checkoutBtn.addEventListener("click", async () => {
+      const originalText = checkoutBtn.textContent;
+      checkoutBtn.textContent = t("Processing...");
+      checkoutBtn.disabled = true;
+      try {
+        await startCheckout(cart);
+      } catch (err) {
+        console.error("Checkout failed:", err);
+        alert(`Checkout Error: ${err.message}`);
+      } finally {
+        checkoutBtn.textContent = originalText;
+        checkoutBtn.disabled = false;
+      }
     });
   }
+}
 
-  applyTranslations(root, getCurrentLanguage());
+
+async function startCheckout(items) {
+  // Determine site URL for callback
+  const siteUrl = window.location.origin;
+
+  const res = await fetch("https://xolbpncjwbplwqtlkygt.supabase.co/functions/v1/create-checkout", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ 
+      items: items.map(i => ({ 
+        slug: i.slug,
+        name: i.name, 
+        price: i.price, 
+        quantity: i.quantity 
+      })),
+      SITE_URL: siteUrl
+    })
+  });
+
+  if (!res.ok) {
+    let errorMessage = "Network error";
+    try {
+      const errData = await res.json();
+      errorMessage = errData.error || errorMessage;
+    } catch (e) {
+      errorMessage = res.statusText || errorMessage;
+    }
+    throw new Error(errorMessage);
+  }
+
+  const { clientSecret } = await res.json();
+  if (clientSecret) {
+    // Initialize Stripe with the provided publishable key
+    const stripe = Stripe('pk_test_51TT3in3aKa7tzuJSB6eQEFle4Bv5x99iF6vbHLs3W5SUr3rPMOOQK1uWxXbpeXEEQXzsqFDEVU8XAzHOSibZLC4t00y7ByMOfo');
+    
+    const subtotal = items.reduce((total, i) => total + (i.price * 100) * i.quantity, 0);
+
+    const checkout = await stripe.initEmbeddedCheckout({
+      clientSecret,
+    });
+
+    // Hide standard cart UI, show checkout container
+    const cartRoot = document.querySelector("[data-cart-root]");
+    const checkoutContainer = document.getElementById("checkout-container");
+    
+    if (cartRoot && checkoutContainer) {
+      cartRoot.style.display = "none";
+      checkoutContainer.style.display = "block";
+      
+      // Mount Stripe Checkout
+      checkout.mount('#stripe-checkout-mount');
+      
+      // Scroll to top smoothly
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  }
 }
 
 mountLayout();
@@ -1043,6 +1239,7 @@ initShopMenu();
 initStickyHeader();
 initNewsletterForm();
 initFloaters();
+initCartToast();
 initCookieBanner();
 initContactForm();
 initCollectionFilters();
@@ -1075,6 +1272,7 @@ document.addEventListener("lang:changed", async (e) => {
     initAddToCartForms();
     initQuantitySelectors();
     initProductGallery();
+    initCollectionFilters();
     syncCartCount();
     
     // Translate the whole DOM asynchronously
@@ -1094,3 +1292,29 @@ if (document.readyState === "complete") {
 } else {
   window.addEventListener("load", initRevealAnimations);
 }
+
+// Clear cart on success page
+if (window.location.pathname.includes("success.html")) {
+  clearCart();
+  syncCartCount();
+}
+
+function initFooterAccordions() {
+  if (window.innerWidth > 768) return;
+  
+  const footerHeadings = document.querySelectorAll('.footer-grid h3');
+  footerHeadings.forEach(heading => {
+    heading.addEventListener('click', () => {
+      const list = heading.nextElementSibling;
+      if (list && list.classList.contains('footer-list')) {
+        const isActive = list.classList.toggle('is-active');
+        heading.style.setProperty('--icon-content', isActive ? '"-"' : '"+"');
+      }
+    });
+  });
+}
+
+// Update the CSS to handle the accordion icon change
+document.addEventListener('DOMContentLoaded', () => {
+  initFooterAccordions();
+});

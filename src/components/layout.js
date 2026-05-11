@@ -1,12 +1,16 @@
-import { announcementItems, footerGroups, mainUSPs, navigation, shopCategories, siteConfig } from "../data/site.js?v=20260503";
-import { getCurrentLanguage, LANGUAGE_OPTIONS, t } from "../data/translations.js?v=20260503";
+import { announcementItems, footerGroups, mainUSPs, navigation, shopCategories, siteConfig } from "../data/site.js?v=20260511_v1";
+import { getCurrentLanguage, LANGUAGE_OPTIONS, t } from "../data/translations.js?v=20260511_v1";
 
-function buildNavigationLinks() {
+function buildNavigationLinks(isMobile = false) {
   return navigation
+    .filter((item) => isMobile ? !item.highlight : true)
     .map(
       (item) => `
         <li>
-          <a class="nav-link ${item.highlight ? "nav-link-sale sale-badge" : ""}" data-nav-link href="${item.href}">${t(item.label)}</a>
+          <a class="nav-link ${item.highlight ? "nav-link-sale sale-badge" : ""}" data-nav-link href="${item.href}">
+            ${t(item.label)}
+            ${isMobile ? '<span class="material-symbols-outlined">chevron_right</span>' : ""}
+          </a>
         </li>
       `,
     )
@@ -131,7 +135,7 @@ export function renderHeader() {
         </div>
 
         <div class="nav-actions">
-          <div class="language-switcher-custom" data-language-dropdown data-no-translate>
+          <div class="language-switcher-custom hidden-mobile" data-language-dropdown data-no-translate>
             <button type="button" class="language-switcher-btn" data-language-btn aria-haspopup="true" aria-expanded="false">
               <span class="lang-flag">${LANGUAGE_OPTIONS.find(l => l.code === currentLanguage)?.flag || '🇬🇧'}</span>
               <span class="lang-code">${currentLanguage.toUpperCase()}</span>
@@ -147,11 +151,8 @@ export function renderHeader() {
               `).join("")}
             </div>
           </div>
-          <a class="nav-icon-btn" href="/collectie.html" aria-label="${t("Search")}">
-            <span class="material-symbols-outlined nav-icon" aria-hidden="true">search</span>
-          </a>
-          <a class="nav-icon-btn" href="/contact.html" aria-label="${t("Account")}">
-            <span class="material-symbols-outlined nav-icon" aria-hidden="true">person</span>
+          <a class="nav-icon-btn hidden-mobile" href="/support.html" aria-label="${t("Support")}">
+            <span class="material-symbols-outlined nav-icon" aria-hidden="true">support_agent</span>
           </a>
           <a class="nav-icon-btn nav-icon-btn--cart" href="/cart.html" aria-label="${t("Cart")}">
             <span class="material-symbols-outlined nav-icon" aria-hidden="true">shopping_cart</span>
@@ -169,15 +170,21 @@ export function renderHeader() {
       <div class="mobile-menu" id="mobile-menu" data-mobile-menu>
         <nav aria-label="Mobiele navigatie">
           <ul>
-            <li class="mobile-submenu-item">
-              <button class="mobile-submenu-toggle" type="button" aria-expanded="false" data-mobile-submenu-toggle>
-                ${t("Shop")}
-              </button>
-              <ul class="mobile-submenu" data-mobile-submenu>
-                ${buildMobileShopLinks()}
-              </ul>
+            <li><a class="nav-link nav-link--sale" href="/sale.html" style="color: #1b4332 !important; font-weight: 600 !important;">${t("Sale")}<span class="material-symbols-outlined">chevron_right</span></a></li>
+            ${buildNavigationLinks(true)}
+            <li class="mobile-menu-divider"></li>
+            <li><a class="nav-link" href="/support.html">${t("Support Center")}<span class="material-symbols-outlined">chevron_right</span></a></li>
+            <li class="mobile-menu-languages">
+              <p class="mobile-submenu-heading">${t("Language")}</p>
+              <div class="mobile-language-grid">
+                ${LANGUAGE_OPTIONS.map((language) => `
+                  <button type="button" class="mobile-lang-btn ${language.code === currentLanguage ? 'is-active' : ''}" data-lang-code="${language.code}">
+                    <span class="lang-flag">${language.flag}</span>
+                    <span class="lang-label">${language.label}</span>
+                  </button>
+                `).join("")}
+              </div>
             </li>
-            ${buildNavigationLinks()}
           </ul>
         </nav>
       </div>
@@ -251,24 +258,55 @@ export function renderFloaters() {
       </svg>
     </a>
     
+    <!-- Cart Toast (Nike style) -->
+    <div class="cart-toast-overlay" data-cart-toast aria-hidden="true">
+      <div class="cart-toast">
+        <div class="cart-toast-header">
+          <div class="cart-toast-title">
+            <span class="material-symbols-outlined cart-toast-check">check_circle</span>
+            <span data-i18n="Added to Cart">Toegevoegd aan winkelwagen</span>
+          </div>
+          <button type="button" class="cart-toast-close" data-cart-toast-close aria-label="${t("Close")}">✕</button>
+        </div>
+        
+        <div class="cart-toast-body" data-cart-toast-content>
+          <!-- Dynamic Content -->
+        </div>
+
+        <div class="cart-toast-footer">
+          <a href="/cart.html" class="btn btn-secondary btn-full">${t("View Cart")} (<span data-cart-count-toast>0</span>)</a>
+          <a href="/cart.html" class="btn btn-primary btn-full">${t("Checkout")}</a>
+        </div>
+      </div>
+    </div>
+
     <!-- Discount Popup -->
     <div class="discount-popup-overlay" data-discount-popup aria-hidden="true" role="dialog">
       <div class="discount-popup-card">
         <button type="button" aria-label="${t("Close popup")}" class="popup-close-btn" data-popup-close>✕</button>
-        <div class="popup-image-side"></div>
+        
         <div class="popup-content-side">
-          <p class="eyebrow uppercase-spaced">${t("Welcome Offer")}</p>
-          <h2 style="font-size: 2.5rem; margin-bottom: 1rem;">${t("Nature at Home for <span class=\"hero-italic\">Less.</span>")}</h2>
-          <p style="color: var(--color-on-surface-variant); margin-bottom: 2rem;">${t("Leave your email address and receive an immediate 10% discount on your first order.")}</p>
-          <form style="display: flex; flex-direction: column; gap: 1rem;" data-popup-form novalidate>
+          <div class="popup-logo-wrap">
+             <img src="/assets/images/4EverPlantsTextLogo.png" alt="4EverPlants" class="popup-brand-logo" />
+          </div>
+          <h2 class="popup-title">${t("You have 10% off!")}</h2>
+          
+          <form class="popup-form" data-popup-form novalidate>
             <div class="form-field">
               <label class="sr-only" for="popup-email">${t("Email address")}</label>
-              <input id="popup-email" type="email" name="email" placeholder="${t("Your email address")}" required />
+              <input id="popup-email" type="email" name="email" placeholder="${t("Email")}" required />
             </div>
-            <button type="submit" class="btn btn-primary" style="width: 100%;">${t("Redeem Discount")}</button>
+            
+            <p class="popup-disclaimer">${t("No spam, only the best deals. Unsubscribe anytime.")}</p>
+            
+            <button type="submit" class="btn btn-primary popup-submit-btn">${t("Claim discount")}</button>
             <p class="form-feedback" data-form-feedback aria-live="polite"></p>
+            
+            <button type="button" class="popup-no-thanks" data-popup-close>${t("No, I don't want a discount")}</button>
           </form>
         </div>
+
+        <div class="popup-image-side"></div>
       </div>
     </div>
     

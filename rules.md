@@ -86,7 +86,7 @@ This document serves as the "ground truth" for the 4EverPlants website project. 
 - **KvK:** 99813742
 - **BTW:** NL003787431B61
 - **Address:** Eimerssingel-oost 25C, 6834CX, Arnhem
-- **Contact:** info@4everplants.nl / +31 (0)26 123 45 67
+- **Contact:** info@4everplants.nl / +31 (0)26 123 45 67 - replace by real one.
 
 ### 2. Shipping Policy
 - **NL (Core Market):** Free shipping over €100. Shipping cost €6.95 for orders under €100. Delivery time: 1-2 business days.
@@ -106,6 +106,16 @@ This document serves as the "ground truth" for the 4EverPlants website project. 
 - **Refunds:** Within 14 days after return notification, via the original payment method.
 - **Damaged Goods:** Customer must directly email a photo. We ensure quick replacement or solution.
 - **Exchanges:** Place a new order and return the old product for a refund.
+
+---
+
+## 🤖 AI Assistant Protocol
+
+### 1. Verification & Browser Usage
+- **DO NOT** use browser tools (Chrome, screenshots, browser subagents, etc.) for verification.
+- All verification of UI, layout, and logic is performed manually by the USER.
+- Trust the code changes and rely on the USER's feedback for validation.
+- Focus on code quality and implementation details within the workspace.
 
 ---
 

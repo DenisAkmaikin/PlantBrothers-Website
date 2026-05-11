@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="nl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Success | 4EverPlants - Premium Artificial Plants</title>
+    <meta name="description" content="Thank you for your order at 4EverPlants." />
+    <!-- Meta Tags -->
+    <meta property="og:title" content="Bedankt | 4EverPlants" />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="/assets/images/product-strelitzia.svg" />
+    <link rel="stylesheet" href="/src/styles/main.css?v=20260511_v1" />
+    <script type="module" src="/src/scripts/main.js?v=20260511_v1"></script>
+    <style>
+      .success-shell {
+        min-height: 50vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 4rem 2rem;
+      }
+      .success-icon {
+        font-size: 5rem;
+        color: #2e7d32;
+        margin-bottom: 2rem;
+      }
+      .success-content {
+        max-width: 600px;
+        background: var(--color-surface-container-low);
+        padding: 4rem;
+        border-radius: var(--radius-3xl);
+        border: 1px solid var(--color-outline-variant);
+      }
+      .success-content h1 {
+        margin-bottom: 1.5rem;
+      }
+      .success-content p {
+        font-size: 1.125rem;
+        line-height: 1.8;
+        color: var(--color-on-surface-variant);
+        margin-bottom: 2.5rem;
+      }
+    </style>
+  </head>
+  <body>
+    <div data-header-root></div>
+
+    <main>
+      <section class="section success-shell">
+        <div class="success-content reveal">
+          <span class="material-symbols-outlined success-icon">check_circle</span>
+          <h1 data-i18n="Thank you for your order!">Thank you for your order!</h1>
+          <p data-i18n="Your payment was successful. We have received your order and will begin processing it immediately. You will receive a confirmation email shortly.">
+            Your payment was successful. We have received your order and will begin processing it immediately. You will receive a confirmation email shortly.
+          </p>
+          
+          <div id="order-info" style="margin-bottom: 3rem; padding: 1.5rem; background: rgba(0,0,0,0.03); border-radius: 1rem; display: none;">
+            <p style="margin: 0; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.6;" data-i18n="Order Reference">Order Reference</p>
+            <strong id="session-id-display" style="font-size: 1.1rem; color: var(--color-primary);"></strong>
+          </div>
+
+          <a class="btn btn-primary" href="/collectie.html" data-i18n="Return to shop">Return to shop</a>
+        </div>
+      </section>
+
+      <div data-newsletter-root></div>
+    </main>
+
+    <script>
+      // Display the session ID as a reference if it exists in the URL
+      const params = new URLSearchParams(window.location.search);
+      const sessionId = params.get('session_id');
+      if (sessionId) {
+        document.getElementById('order-info').style.display = 'block';
+        document.getElementById('session-id-display').textContent = sessionId.slice(-12).toUpperCase();
+      }
+    </script>
+
+    <div data-footer-root></div>
+    <div data-popup-root></div>
+  </body>
+</html>

@@ -2,5 +2,8 @@
   "dependencies": {
     "i18next": "^26.0.8",
     "i18next-http-backend": "^3.0.6"
+  },
+  "devDependencies": {
+    "supabase": "^2.98.2"
   }
 }

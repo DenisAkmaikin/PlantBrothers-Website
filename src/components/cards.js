@@ -1,6 +1,6 @@
-import { createProductImageComponent } from "./product-image.js?v=20260503";
-import { t } from "../data/translations.js?v=20260503";
-import { formatPrice } from "../scripts/cart-store.js?v=20260503";
+import { createProductImageComponent } from "./product-image.js?v=20260511_v1";
+import { t } from "../data/translations.js?v=20260511_v1";
+import { formatPrice } from "../scripts/cart-store.js?v=20260511_v1";
 
 export function createCategoryCard(category, index) {
   const isMiddle = index === 1;
@@ -24,14 +24,11 @@ export function createProductCard(product, options = {}) {
   const isFeatured = options.variant === "featured";
   const badges = product.badges.map((badge) => `<span class="badge">${t(badge)}</span>`).join("");
   const stars = "★★★★★";
-  const imageMarkup = product.media
-    ? createProductImageComponent({
-        ...product.media,
-        className: "product-image-switch--card",
-      })
-    : `<img class="card-image" src="${product.image}" alt="${product.name}" loading="lazy" />`;
+  const imageSrc = product.media ? product.media.primarySrc : product.image;
+  const imageClass = product.imageMode === "cover" ? "card-image card-image--cover" : "card-image";
+  const imageMarkup = `<img class="${imageClass}" src="${imageSrc}" alt="${product.name}" loading="lazy" />`;
 
-  const descriptionHtml = isFeatured ? "" : `<p class="product-description">${t(product.description)}</p>`;
+  const descriptionHtml = `<p class="product-description">${t(product.description)}</p>`;
 
   return `
     <article class="product-card reveal ${isFeatured ? "product-card--featured" : ""}" data-product-category="${product.filter}">

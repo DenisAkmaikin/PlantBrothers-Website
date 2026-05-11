@@ -1,4 +1,4 @@
-import { getCurrentLanguage } from "../data/translations.js?v=20260503";
+import { getCurrentLanguage } from "../data/translations.js?v=20260511_v1";
 
 const CART_KEY = "4everplants-cart";
 
