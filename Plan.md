@@ -32,11 +32,12 @@ Based on the client requests and the `rules.md` guidelines (Vanilla HTML/CSS/JS,
 ---
 
 ### Progress Status
-- **Current Phase**: Final Polish & Content Optimization
-- **Completed**: Implementation of Navigation, Hero Config, Chat, Popup logic, Premium Product Detail UI, and Localization.
-- **Next Up**: Final QA and deployment prep.
+- **Current Phase**: Final QA & Deployment Prep
+- **Completed**: Navigation, Hero, Chat, Popup, Localization, and MailerLite Marketing Automation.
+- **Next Up**: Domain verification and Production launch.
 
 ### 6. Future Enhancements (Roadmap)
-*   [ ] **Pot Pairing Recommendations**: Add a "Style it with" section for each product. Once pot/vase imagery is available, suggest compatible decorative pots to increase average order value.
-*   [ ] **Comparison Table**: Implement a "Real Plant vs. 4EverPlants" table to handle conversion objections around price and maintenance.
-*   [ ] **Styling Guide Carousel**: Add a section with professional styling tips and high-res placement ideas (e.g., "The perfect accent for minimalist offices").
+*   [ ] **Pot Pairing Recommendations**: Add a "Style it with" section for each product.
+*   [ ] **Comparison Table**: "Real Plant vs. 4EverPlants" table.
+*   [ ] **Abandoned Cart Recovery**: Enable MailerLite automation (sync logic is ready).
+*   [ ] **Styling Guide Carousel**: High-res placement ideas.

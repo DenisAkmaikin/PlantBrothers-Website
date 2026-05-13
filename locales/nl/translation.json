@@ -344,5 +344,11 @@
   "Winkel nog voor": "Winkel nog voor",
   "om in aanmerking te komen voor gratis verzending!": "om in aanmerking te komen voor gratis verzending!",
   "Gratis verzending toegepast": "Gratis verzending toegepast",
-  "cart.checkout": "Afrekenen"
+  "cart.checkout": "Afrekenen",
+  "Email for order updates": "E-mail voor bestelupdates",
+  "We use this to save your cart if you're not ready to buy yet.": "We gebruiken dit om je winkelwagen op te slaan als je nog niet klaar bent om te kopen.",
+  "Please enter your email to proceed to checkout.": "Voer je e-mailadres in om verder te gaan naar afrekenen.",
+  "You are already subscribed to our newsletter!": "Je bent al aangemeld voor onze nieuwsbrief!",
+  "Success! Your unique 10% discount code has been sent to your email.": "Succes! Je unieke kortingscode van 10% is naar je e-mail gestuurd.",
+  "Sending...": "Versturen..."
 }

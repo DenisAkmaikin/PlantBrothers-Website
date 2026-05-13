@@ -1,0 +1,59 @@
+ PlantBrothers: Premium E-Commerce Architecture
+System Overview & Handover Document
+
+This document summarizes the high-end technical implementations that make the PlantBrothers checkout flow secure, scalable, and operationally efficient. These features go beyond a "basic shop" and represent a custom-engineered enterprise solution.
+
+🚀 1. Dynamic Shipping Engine (Real-Time)
+Instead of using static, restrictive shipping rules in the Stripe Dashboard, we built a Serverless Shipping Engine.
+
+How it works: The moment a customer selects their country in the checkout, our backend instantly calculates the exact shipping fee based on your specific business logic (e.g., Free over €100 for NL, €25 for International).
+Benefit: No manual maintenance of Stripe shipping zones. It handles complex region-based pricing (NL, BE/DE, EU, International) flawlessly and updates the total live on-screen.
+🛡️ 2. Enterprise-Grade Security (Anti-Tamper)
+We implemented a "Source of Truth" security model to prevent common e-commerce hacks.
+
+Anti-Tamper Defense: The system ignores the "Total Price" sent by the user's browser. Instead, our backend retrieves the actual price from the secured Stripe session before calculating shipping or processing the payment. A user cannot "hack" free shipping or lower the price via the browser console.
+Duplicate Protection: The system monitors for duplicate payment signals. If a payment event is sent twice (common with network glitches), our logic identifies the duplicate and prevents double-entry in your database.
+🎨 3. Seamless Embedded Checkout
+We migrated from the old "Redirect-to-Stripe" method to a modern Embedded Flow.
+
+The Experience: Customers never leave plantbrothers.nl. The payment UI is mounted directly into your site, maintaining the premium brand feel and significantly increasing conversion rates.
+Branded UI: The checkout box is automatically styled via the Stripe Branding settings, ensuring colors and fonts match the 4EverPlants aesthetic.
+📦 4. Packaging-Ready Fulfillment
+The system is designed for operational speed.
+
+Clean Data Extraction: Instead of messy notifications, the system generates a structured summary with the address broken down by Country, City, Zip, and Street.
+Itemized Orders: Every purchase is broken down into a "Packing List" showing exactly which plants were bought, in what quantity, and with what shipping method.
+📊 5. Supabase Order Synchronization
+Every successful order is instantly synced to a centralized database.
+
+Order Tracking: All customer details, shipping info, and Stripe Session IDs are stored securely.
+Line Item Detail: We don't just store the "Total"; we store every individual item bought, making it easy to track inventory and sales performance over time.
+🛠️ Maintenance & Management
+Order Status: Manage orders directly in the Supabase Dashboard. Change status from paid to shipped with a single click.
+Branding: Update your logo or brand colors anytime in the Stripe Dashboard > Settings > Branding.
+Future Ready: This architecture is 100% compatible with future upgrades like automated shipping label printing or a dedicated Customer Account portal.
+
+🏆 PlantBrothers Tech & Marketing: Brag Sheet
+🚀 Key Achievements
+1. Cyber-Minimalist UI Overhaul
+Geometric Precision: Replaced all rounded corners with a sharp, 0px-radius architectural design language.
+Razor Grid System: Implemented a 1px-grid layout for the hero section, utilizing thin lines to create a premium, futuristic "Nike-inspired" aesthetic.
+Interactive Line Crossing: Developed custom CSS hover effects where geometric lines expand beyond containers, creating a high-tech "crossing" interaction for buttons and category cards.
+2. Deno-Native Checkout Architecture
+Infrastructure Hardening: Migrated the Supabase Edge Function to a Deno-native implementation to resolve memory and event-loop crashes.
+Security Validation: Implemented strict server-side price and slug validation, ensuring that client-side price tampering is impossible.
+Deployment Resilience: Resolved persistent 401 Unauthorized errors by correctly configuring the Edge Function for public access without JWT verification.
+3. Advanced Marketing Automation (NEW)
+Abuse-Proof Discount Engine: Developed a secure coupon system that checks Supabase claims before generating unique, single-use Stripe coupons on the fly.
+MailerLite E-commerce Bridge: Integrated the MailerLite v3 API to sync orders and customers, enabling high-performance lead conversion and retention.
+Privacy-First Lead Gen: Transitioned to a secure Supabase-to-MailerLite bridge, ensuring GDPR-compliant double opt-in and zero exposure of API keys.
+4. Stripe Integration Stability
+Compatibility Resolution: Fixed critical regressions caused by incompatible Stripe API parameters.
+Shipping Recovery: Restored full shipping address collection logic across the EU.
+Zero-Latency Price Logic: Optimized the frontend-to-backend price transmission for 100% accuracy.
+🛠️ Technical State
+Backend: Supabase Edge Functions (Deno)
+Marketing: MailerLite API v3 + Stripe Coupon API
+Frontend: Vanilla JavaScript (ES Modules)
+Design System: Custom CSS variables with architectural grid logic.
+Updated May 12, 2026

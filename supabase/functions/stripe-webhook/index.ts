@@ -112,7 +112,32 @@ Deno.serve(async (req) => {
 
       console.log(`Order inserted successfully for session: ${sessionId}`);
 
-      // 4. Trigger the Order Confirmation Email (Async)
+      // 4. Sync Order to MailerLite (Async)
+      const MAILERLITE_API_KEY = Deno.env.get('MAILERLITE_API_KEY');
+      const SHOP_ID = Deno.env.get('MAILERLITE_SHOP_ID');
+      if (MAILERLITE_API_KEY && SHOP_ID && email) {
+        fetch(`https://connect.mailerlite.com/api/ecommerce/shops/${SHOP_ID}/orders`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${MAILERLITE_API_KEY}`,
+          },
+          body: JSON.stringify({
+            id: String(orderId),
+            email: email,
+            currency: 'EUR',
+            total_price: amountTotal / 100, // Stripe uses cents
+            items: lineItems.data.map((item: any) => ({
+              ecommerce_product_id: item.price?.product?.id || item.description,
+              name: item.description,
+              unit_price: (item.price?.unit_amount || 0) / 100,
+              quantity: item.quantity
+            }))
+          })
+        }).catch(err => console.error("Error syncing to MailerLite:", err));
+      }
+
+      // 5. Trigger the Order Confirmation Email (Async)
       // We don't 'await' this so the webhook returns quickly to Stripe
       fetch(`${Deno.env.get('SUPABASE_URL')}/functions/v1/send-order-email`, {
         method: 'POST',

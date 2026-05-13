@@ -698,24 +698,17 @@ function initNewsletterForm() {
 
     const btn = form.querySelector("button[type='submit']");
     const originalText = btn.textContent;
-    btn.textContent = "Sending...";
+    btn.textContent = t("Sending...");
     btn.disabled = true;
 
     try {
-      const response = await fetch("https://formspree.io/f/mzdokwkn", {
+      const response = await fetch("https://xolbpncjwbplwqtlkygt.supabase.co/functions/v1/subscribe", {
         method: "POST",
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
-        },
-        body: JSON.stringify({ 
-          email: email, 
-          form: 'Footer Newsletter',
-          page: window.location.pathname 
-        })
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, type: 'newsletter' })
       });
       
-      if (!response.ok) throw new Error("Submission failed");
+      if (!response.ok) throw new Error("Subscription failed");
       
       form.reset();
       setFeedback(form, t("Thank you. You will receive inspiration and promotions from 4EverPlants shortly."), true);
@@ -783,23 +776,22 @@ function initFloaters() {
     btn.disabled = true;
 
     try {
-      const response = await fetch("https://formspree.io/f/mzdokwkn", {
+      const response = await fetch("https://xolbpncjwbplwqtlkygt.supabase.co/functions/v1/subscribe", {
         method: "POST",
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
-        },
-        body: JSON.stringify({ 
-          email: email, 
-          form: 'Discount Popup (WELCOME10)',
-          page: window.location.pathname 
-        })
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, type: 'discount' })
       });
       
       if (!response.ok) throw new Error("Submission failed");
+      const data = await response.json();
       
-      setFeedback(form, t("Thank you! Use code WELCOME10 at checkout."), true);
-      setTimeout(closePopup, 3500);
+      if (data.status === 'exists') {
+        setFeedback(form, t("You are already subscribed to our newsletter!"), false);
+      } else {
+        setFeedback(form, t("Success! Your unique 10% discount code has been sent to your email."), true);
+        localStorage.setItem(POPUP_SHOWN_KEY, "true");
+        setTimeout(closePopup, 4000);
+      }
     } catch (error) {
       console.error("Popup submission error:", error);
       setFeedback(form, t("Sorry, something went wrong. Please try again later."), false);

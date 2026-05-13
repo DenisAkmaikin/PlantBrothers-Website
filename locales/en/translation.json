@@ -294,5 +294,11 @@
   "Winkel nog voor": "Add",
   "om in aanmerking te komen voor gratis verzending!": "more to qualify for free shipping!",
   "Gratis verzending toegepast": "Free shipping applied",
-  "cart.checkout": "Checkout"
+  "cart.checkout": "Checkout",
+  "Email for order updates": "Email for order updates",
+  "We use this to save your cart if you're not ready to buy yet.": "We use this to save your cart if you're not ready to buy yet.",
+  "Please enter your email to proceed to checkout.": "Please enter your email to proceed to checkout.",
+  "You are already subscribed to our newsletter!": "You are already subscribed to our newsletter!",
+  "Success! Your unique 10% discount code has been sent to your email.": "Success! Your unique 10% discount code has been sent to your email.",
+  "Sending...": "Sending..."
 }
